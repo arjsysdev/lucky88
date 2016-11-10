@@ -1,0 +1,155 @@
+/* Fonts */
+@font-face {
+    font-family: "OSReg";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Regular-webfont.woff") format("woff"), url("../fonts/OpenSans-Regular-webfont.ttf") format("truetype"), url("../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular") format("svg");
+}
+@font-face {
+    font-family: "OSBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/OpenSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Bold-webfont.woff") format("woff"), url("../fonts/OpenSans-Bold-webfont.ttf") format("truetype"), url("../fonts/OpenSans-Bold-webfont.svg#OpenSansBold") format("svg");
+}
+@font-face {
+    font-family: "OSLight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Light-webfont.woff") format("woff"), url("../fonts/OpenSans-Light-webfont.ttf") format("truetype"), url("../fonts/OpenSans-Light-webfont.svg#OpenSansBold") format("svg");
+}
+@font-face {
+    font-family: 'sofia_pro_light_condensedRg';
+    src: url('../fonts/SofiaProLiCond-webfont.eot');
+    src: url('../fonts/SofiaProLiCond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/SofiaProLiCond-webfont.woff') format('woff'),
+         url('../fonts/SofiaProLiCond-webfont.ttf') format('truetype'),
+         url('../fonts/SofiaProLiCond-webfont.svg#sofia_pro_light_condensedRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {font-family: OSReg,sans-serif;margin: 0;padding: 0; background: rgba(0,0,0,0.1);}
+.bold{font-family: OSBold,sans-serif;}
+.regular{font-family: OSReg,sans-serif;}
+.light{font-family: OSLight,sans-serif;}
+
+.uppercase{text-transform: uppercase;}
+.fblue{color: #0084ff;background-color: transparent;}
+.mb10{margin-bottom: 10px !important;}
+.mb15{margin-bottom: 15px !important;}
+.mb20{margin-bottom: 20px !important;}
+.mb35{margin-bottom: 35px !important;}
+.mt25{margin-top: 25px !important;}
+.mt20{margin-top: 20px !important;}
+.no-tmargin{margin-top: 0px !important;}
+.no-bmargin{margin-bottom: 0px !important;}
+.pleft5{padding-left: 5px !important;}
+.no-pleft{padding-left: 0px !important;}
+.margin{margin: 20px 0 20px !important;}
+.color-trans{
+	color: rgba(255,255,255,0) !important;
+}
+.chinese-green{background-color: #00a30e;color: #fff !important;}
+.chinese-red{background-color: #f90d02;color: #fff !important;}
+.lucky888login{
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	margin: 70px auto;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 4px;
+   color: rgba(0, 0, 0, 1);
+   padding: 0px 30px 20px 30px;
+   background-color: rgba(255,255,255,1);
+}
+.lucky888login h1{
+	font-size: 24px;
+}
+.l-login-input{
+	border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 4px;
+   color: rgba(0, 0, 0, 1);
+   display: block;
+   font-size: 17px;
+   height: 42px;
+   margin-bottom: 12px;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 0 16px;
+   box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+.l-login-input-raw{
+	border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 4px;
+   color: rgba(0, 0, 0, 1);
+   display: block;
+   font-size: 17px;
+   height: 42px;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 0 16px;
+   box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+.l-attach-input{
+	border: 1px solid rgba(0, 0, 0, 0);
+   border-radius: 4px;
+   color: rgba(255, 255, 255, 1);
+   display: block;
+   font-size: 17px;
+   height: auto;
+   background-color: rgba(0,132,255,1.0);
+   width: 100%;
+}
+.lucky888user{
+	margin: 70px auto;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 4px;
+   color: rgba(0, 0, 0, 1);
+   padding: 0px 30px 20px 30px;
+   background-color: rgba(255,255,255,1);
+}
+.form-padding{
+	background-color: transparent;
+	padding: 5px 5px 1px 5px;
+}
+.form-hover{
+	background-color: transparent;
+	padding: 5px 5px 1px 5px;
+	border-radius: 5px;
+	width: auto;
+}
+.form-hover:hover{
+	background-color: #f1f0f0;
+	padding: 5px 5px 1px 5px;
+	border-radius: 5px;
+	width: auto;
+}
+.thead-blue{
+	background-color: rgba(0,132,255,1.0);
+	color: #fff;
+}
+.btn-blue{
+	background-color: rgba(0,132,255,1.0) !important;
+	color: #fff;
+}
+.btn-blue:hover{
+	background-color: rgba(0,107,207,1.0) !important;
+	color: #fff;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
