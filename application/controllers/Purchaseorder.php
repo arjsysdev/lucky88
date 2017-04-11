@@ -1,5 +1,5 @@
 <?php
-	Class Salesorder extends CI_Controller{
+	Class Purchaseorder extends CI_Controller{
 
 
 		public function __construct(){
@@ -11,37 +11,28 @@
 			$this->load->model('Contacts_model', 'contacts');
 			$this->load->model('Products_model', 'products');
 			$this->load->model('Pricelist_model', 'pricelist');
-			$this->load->model('Salesorder_model', 'salesorder');
+			$this->load->model('Purchaseorder_model', 'purchaseorder');
 			if (!$this->ion_auth->logged_in())
 			{
 				redirect('auth/login', 'refresh');
 			}
 		}
 
-		public function test(){
-			$array[0] = array(2, 5, 2);
-			$array[1] = array(2, 5, 1);
-			$array[2] = array(2, 5, 2);
-
-
-
-			debug($array, 1);
-		}
-
+	
 		public function index(){
-			$data['title'] = 'Sales Orders';
-			$data['bcrumbs'] = 'Sales Orders';
+			$data['title'] = 'Purchase Orders';
+			$data['bcrumbs'] = 'Purchase Orders';
 
-			$data['orders'] = $this->salesorder->getAll();
-			$this->_render_page('sales/index', $data);
+			$data['orders'] = $this->purchaseorder->getAll();
+			$this->_render_page('purchase/index', $data);
 		}
 
 		public function view($id){
 			$data['title'] = 'Sales Orders';
 			$data['bcrumbs'] = 'Sales Orders';
 			if($id){
-				$data['order'] = $this->salesorder->getByID($id);
-				$data['items'] = $this->salesorder->getItemsBySOID($id);
+				$data['order'] = $this->purchaseorder->getByID($id);
+				$data['items'] = $this->purchaseorder->getItemsBySOID($id);
 			
 				$this->_render_page('sales/view', $data);
 			}
@@ -51,26 +42,15 @@
 			
 		}
 
+
 		public function formadd(){
-			$data['title'] = 'Add Sales Orders';
-			$data['bcrumbs'] = 'Add Sales Orders';
-			$data['contacts'] = $this->contacts->getBoth();
+			$data['title'] = 'New Purchase Order';
+			$data['bcrumbs'] = 'New Purchase Order';
+
+			$data['contacts'] = $this->contacts->getBothPO();
 			$data['products'] = $this->products->getAll();
-			$this->_render_page('sales/formadd', $data);
-		}
+			$this->_render_page('purchase/formadd', $data);
 
-		public function formprice(){
-			$data['title'] = 'Sales Order Prices';
-			$data['bcrumbs'] = 'Sales Order Prices';
-			$data['salesorder'] = $this->session->userdata('salesorder');
-
-			//get contactid using comp code
-			$compcode = $data['salesorder']['comp_code'];
-			$contact = getContactByCode($compcode);
-			//get pricelist
-			$data['pricelist'] = $this->pricelist->getPriceListByID($contact->contact_id);
-			
-			$this->_render_page('sales/formprice', $data);
 		}
 
 		public function step1so(){
@@ -89,7 +69,7 @@
 			$products = $this->input->post('product');
 			unset($qtys[0]);
 			unset($units[0]);
-			$save['items'] = array();
+			$save['items'] = array(); 
 			$i = 0;
 			foreach($qtys as $key => $qty){
 				$save['items'][$i]['qty'] = $qty;
@@ -99,8 +79,22 @@
 			}
 
 
-			$this->session->set_userdata('salesorder', $save);
-			redirect('salesorder/formprice');
+			$this->session->set_userdata('purchaseorder', $save);
+			redirect('purchaseorder/formprice');
+		}
+
+		public function formprice(){
+			$data['title'] = 'Sales Order Prices';
+			$data['bcrumbs'] = 'Sales Order Prices';
+			$data['purchaseorder'] = $this->session->userdata('purchaseorder');
+
+			//get contactid using comp code
+			$compcode = $data['purchaseorder']['comp_code'];
+			$contact = getContactByCode($compcode);
+			//get pricelist
+			$data['pricelist'] = $this->pricelist->getPriceListByIDSupplier($contact->contact_id);
+			
+			$this->_render_page('purchase/formprice', $data);
 		}
 
 		public function save(){
@@ -128,7 +122,7 @@
 			$saveSO['preparedby'] = $this->ion_auth->user()->row()->id;
 			$saveSO['lasteditby'] = $this->ion_auth->user()->row()->id;
 			
-			$id = $this->salesorder->addSo($saveSO);
+			$id = $this->purchaseorder->addSo($saveSO);
 
 			foreach($post['qty'] as $key => $qty){
 				$items[$key]['qty'] = $qty;
@@ -145,12 +139,10 @@
 			}
 
 			foreach($items as $item){
-				$this->salesorder->addItems($item);
+				$this->purchaseorder->addItems($item);
 			}
-			redirect('salesorder');
+			redirect('purchaseorder');
 		}
-
-
 
 
 
@@ -165,3 +157,4 @@
 	}
 	
 ?>
+

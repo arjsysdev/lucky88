@@ -17,10 +17,33 @@
 
 		public function getnumber($code = null){
 			if($code != ''){
-				$total = $this->ajax->getTotalSalesOrder();
+				$last = $this->ajax->getSalesOrderLastByCode($code);
+			
+				if(!empty($last)){
+					$year = date('y', strtotime($last->date_submitted));
+				}
+				else{
+					$year = date('y');
+				}
+				
+				$curYear = date('y');
+				
+				if($year < $curYear){
+					$total = 0;
+				}
+				else{
+					$total = $this->ajax->getTotalSOByCode($code);	
+				}
 				$total++;
+				//echo $this->db->last_query();
 				echo $code.date('y').'-'.str_pad($total, 4, "0", STR_PAD_LEFT);
 			}
+		}
+
+		public function step1so(){
+			$qty = $this->input->post('qty');
+			$unit = $this->input->post('unit');
+			debug($qty);
 		}
 	}
 	

@@ -86,3 +86,81 @@
 				return date("Y-m-d H:i:s");
 		}
 	}
+
+	function getProductPrice($pcode, $contact, $dateorder){
+		$CI =& get_instance();	
+
+		$CI->load->model('Pricelist_model', 'Pricelist');
+		$price = $CI->Pricelist->getProductPrice($pcode, $contact, $dateorder);
+		$value = 0;
+		if(!empty($price)){
+			$value = $price->price;
+		}
+		return $value;
+	}
+
+	function getProductSupplierPrice($pcode, $contact, $dateorder){
+		$CI =& get_instance();	
+
+		$CI->load->model('Pricelist_model', 'Pricelist');
+		$price = $CI->Pricelist->getProductSupplierPrice($pcode, $contact, $dateorder);
+		$value = 0;
+		if(!empty($price)){
+			$value = $price->price;
+		}
+		return $value;
+	}
+
+
+	function getProductPriceDetails($pcode, $contact, $dateorder){
+		$CI =& get_instance();	
+
+		$CI->load->model('Pricelist_model', 'Pricelist');
+		$price = $CI->Pricelist->getProductPrice($pcode, $contact, $dateorder);
+		$value = 0;
+		if(!empty($price)){
+			$value = $price;
+		}
+		return $value;
+	}
+
+	function getProductSupplierPriceDetails($pcode, $contact, $dateorder){
+		$CI =& get_instance();	
+
+		$CI->load->model('Pricelist_model', 'Pricelist');
+		$price = $CI->Pricelist->getProductSupplierPrice($pcode, $contact, $dateorder);
+		$value = 0;
+		if(!empty($price)){
+			$value = $price;
+		}
+		return $value;
+	}
+
+	function getContactByCode($code){
+		$CI =& get_instance();	
+
+		$CI->load->model('Contacts_model', 'Contact');
+		$contact = $CI->Contact->getByCodeRow($code);
+		return $contact;
+	}
+
+	function getUserByID($id){
+		$CI =& get_instance();	
+
+		$CI->load->model('Contacts_model', 'Contact');
+		$user = $CI->Contact->getUserByID($id);
+		return $user;
+	}
+
+	function getFullNameUserByID($id){
+		$CI =& get_instance();	
+
+		$CI->load->model('Contacts_model', 'Contact');
+		$user = $CI->Contact->getUserByID($id);
+		return ucfirst($user->first_name).' '.ucfirst($user->last_name);
+	}
+
+
+	function peso_format($value){
+		return '&#8369; '.number_format($value, 2, '.', ',');
+	}

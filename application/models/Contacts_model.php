@@ -28,6 +28,17 @@ class Contacts_model extends CI_Model {
 		$this->db->where_in('contact_type', $type);
 		return $this->db->get($this->_table)->result();
 	}
+
+	public function getBothPO(){
+		$type = array('Both', 'Supplier');
+		$this->db->where_in('contact_type', $type);
+		return $this->db->get($this->_table)->result();
+	}
+
+	public function getUserByID($id){
+		$this->db->where('id', $id);
+		return $this->db->get('users')->row();
+	}
 }
 
 

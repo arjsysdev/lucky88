@@ -19,14 +19,12 @@
     <div class="row">
       <div class="col-md-12">
         <div class="table-responsive">
-          <table class="table">
+          <table class="table table-bordered" id="priceList">
             <thead>
-              <th>#</th>
+              <th>Image</th>
               <th>Code</th>
+              <th>Name</th>
               <th>Type</th>
-              <th>Weigth (Grams)</th>
-              <th>Dimension(L x W x H)</th>
-              <th>Pcs</th>
               <th>Action</th>
             </thead>
             <tbody>
@@ -37,10 +35,8 @@
                 <tr>
                   <td><img src="<?php echo base_url('assets/raw_materials/'.$key->rm_img);?>" width="50px" height="50px"></td>
                   <td><?php echo $key->rm_code; ?></td>
+                  <td><?php echo $key->rm_name; ?></td>
                   <td><?php echo $key->title; ?></td>
-                  <td><?php echo $key->rm_weight; ?></td>
-                  <td><?php echo $key->rm_di_length.' x '.$key->rm_di_width.' x '.$key->rm_di_height; ?></td>
-                  <td><?php echo $key->rm_pcs; ?></td>
                   <td>
                       <a href="<?php echo base_url('RawMaterials/additional?r='.$key->material_id); ?>" >Edit</a>
                   </td>

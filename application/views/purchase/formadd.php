@@ -1,10 +1,10 @@
-<form id="tblData" action="<?= base_url('salesorder/step1so') ?>" method="POST">
+<form id="tblData" action="<?= base_url('purchaseorder/step1so') ?>" method="POST">
 <section id="addsales">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="">Customer ID:</label>
+					<label for="">Supplier ID:</label>
 					<select class="form-control" id="contacts" name="comp_code">
 						<option value="">-Select-</option>
 						<?php
@@ -26,7 +26,7 @@
 		<div class="col-md-12">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="">Customer PO:</label>
+					<label for="">Supplier PO:</label>
 					<input type="text" class="form-control" id="so" name="cpoNum" readonly>
 				</div>
 			</div>

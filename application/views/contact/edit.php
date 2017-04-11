@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<label for="contact_type">Type:</label>
 						<select type="text" class="form-control l-login-input" name="contact_type"  id="contact_type" >
-							<option value="Agency" <?php echo ($contact->contact_type=="Agency")?"Selected":""?>>Agency</option>
+							<option value="Service Provider" <?php echo ($contact->contact_type=="Service Provider")?"Selected":""?>>Service Provider</option>
 							<option value="Customer" <?php echo ($contact->contact_type=="Customer")?"Selected":""?>>Customer</option>
 							<option value="Supplier" <?php echo ($contact->contact_type=="Supplier")?"Selected":""?>>Supplier</option>
 							<option value="Both" <?php echo ($contact->contact_type=="Both")?"Selected":""?>>Both</option>

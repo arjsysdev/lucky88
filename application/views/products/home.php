@@ -9,42 +9,37 @@
       echo $this->session->flashdata('message');
     ?>
 
-
+    <br>
+    <br>
     <div class="row">
       <div class="col-md-12">
-        <table class="table">
+        <table class="table table-bordered" id="priceList">
           <thead>
             <th>#</th>
-            <th>Code</th>
+            <th>Product Code</th>
+            <th>Bar Code</th>
+            <th>Name</th>
             <th>Type</th>
-            <th>Weigth (Grams)</th>
-            <th>Dimension(L x W x H)</th>
+            <th>Categoty</th>
             <th>Pcs</th>
             <th>Action</th>
           </thead>
-          <tfoot>
-            <td>#</td>
-            <td>Code</td>
-            <td>Type</td>
-            <td>Weigth (Grams)</td>
-            <td>Dimension(L x W x H)</td>
-            <td>Pcs</td>
-            <td>Action</td>
-          </tfoot>
           <tbody>
-            <?php
-            if(!empty($raw_mat)){
-            foreach ($raw_mat as $key) {
+           <?php
+            if(!empty($products)){
+              $num = 1;
+            foreach ($products as $key) {
             ?>  
               <tr>
-                <td><img src="<?php echo base_url('assets/raw_materials/'.$key->rm_img);?>" width="50px" height="50px"></td>
-                <td><?php echo $key->rm_code; ?></td>
-                <td><?php echo $key->title; ?></td>
-                <td><?php echo $key->rm_weight; ?></td>
-                <td><?php echo $key->rm_di_length.' x '.$key->rm_di_width.' x '.$key->rm_di_height; ?></td>
-                <td><?php echo $key->rm_pcs; ?></td>
+                <td><?php echo $num++; ?></td>
+                <td><?php echo $key->prod_code; ?></td>
+                <td><?php echo $key->bar_code; ?></td>
+                <td><?php echo $key->prod_name; ?></td>
+                <td><?php echo $key->prod_type; ?></td>
+                <td><?php echo $key->cat_title; ?></td>
+                <td><?php echo $key->prod_pcs; ?></td>
                 <td>
-                    <a href="<?php echo base_url('RawMaterials/additional?r='.$key->material_id); ?>" >Edit</a>
+                    <a href="<?php echo base_url('Products/additional?p='.$key->prod_id); ?>" >Edit</a>
                 </td>
               </tr>
             <?php
@@ -52,11 +47,11 @@
             else{
             ?>
               <tr>
-                <td colspan="7" class="text-danger"> *** No Raw Materials Found ***</td>
+                <td colspan="8" class="text-danger"> *** No Product Found ***</td>
               </tr>
             <?php
             }
-            ?>
+            ?> 
           </tbody>
         </table>
       </div>

@@ -1,7 +1,7 @@
-<section id="salesorder">
+<section id="purchase">
 	<div class="row">
 		<div class="col-md-12">	
-			<a href="<?= base_url('salesorder/formadd') ?>" class="btn btn-default" style="margin-bottom: 20px;">Add</a><br />
+			<a href="<?= base_url('purchaseorder/formadd') ?>" class="btn btn-default" style="margin-bottom: 20px;">Add</a><br />
 			<div class="table-responsive">
 				<table class="table" id="sales">
 					<thead>
@@ -22,7 +22,7 @@
 								<td><?= $order->poNum ?></td>
 								<td><?= $order->comp_code ?></td>
 								<td><?= date('F d,Y', strtotime($order->date_ordered)) ?></td>
-								<td><a href="<?= base_url('salesorder/view/'.$order->id) ?>" class="btn btn-primary">View</a></td>
+								<td><a href="<?= base_url('purchaseorder/view/'.$order->id) ?>" class="btn btn-primary">View</a></td>
 							</tr>
 						<?php
 							}

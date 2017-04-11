@@ -1,41 +1,42 @@
 <div class="lucky888user">
   <div class="row">
     <div class="col-md-12">
-      
+      <div class="mt20">
+          <div class="page-header mb35 no-tmargin">
+            <h1><strong class="uppercase fblue regular"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> ADD</strong> New Raw Materials
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addRawType"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add Raw Materials Type</button>
+
+        
+            </h1>
+          </div>
+
+          <?php
+          echo $this->session->flashdata('message');
+          ?>
   
       <?php
         $att = array('class'=>'form-horizontal','autocomplete'=>'off');
-        echo form_open_multipart('RawMaterials/update_additional/'.$raw_info->material_id,$att);
+        echo form_open_multipart('Raw_Materials/save_rawmaterials',$att);
       ?>
 
-
         <div class="form-group">
-          <label class="control-label col-sm-2" for="">Current Image:</label>
+          <label for="email" class="control-label col-sm-2">Image:</label>
           <div class="col-sm-10">
-           <img src="<?php echo base_url('assets/raw_materials/'.$raw_info->rm_img);?>" class="img-responsive mt25" style="width: 100px; height:100px;">
-           <input type="hidden" class="form-control" name="old_img"  value="<?php echo $raw_info->rm_img; ?>">
-          </div>
-        </div>
-
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="email">New Image(optional):</label>
-          <div class="col-sm-10">
-            <input type="file" class="form-control l-attach-input" name="userfile" >
+            <input type="file" class="btn-default l-attach-input" name="userfile">
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Raw Material Code:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control l-login-input-raw" name="rm_code" value="<?php echo $raw_info->rm_code; ?>" >
+            <input type="text" class="form-control l-login-input-raw" name="rm_code" >
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Raw Material:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control l-login-input-raw" name="rm_name"  value="<?php echo $raw_info->rm_name; ?>" >
+            <input type="text" class="form-control l-login-input-raw" name="rm_name" >
           </div>
         </div>
 
@@ -46,12 +47,7 @@
               <option value="">-Select-</option>
               <?php
               foreach ($raw_type as $key) {
-                $sl = "";
-                if($key->rmt_id == $raw_info->rm_type){
-                  $sl = "selected";
-                }
-
-                echo "<option ".$sl." value=".$key->rmt_id.">".$key->title."</option>";
+                echo "<option value=".$key->rmt_id.">".$key->title."</option>";
               }
               ?>
             </select>
@@ -59,16 +55,16 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="email">Weight:</label>
+          <label class="control-label col-sm-2" for="email">Weight: (Grams)</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control l-login-input-raw" name="rm_weight"  value="<?php echo $raw_info->rm_weight; ?>" >
+            <input type="text" class="form-control l-login-input-raw" name="rm_weight" >
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Pcs:</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control l-login-input-raw" name="rm_pcs"  value="<?php echo $raw_info->rm_pcs; ?>" >
+            <input type="number" class="form-control l-login-input-raw" name="rm_pcs" >
           </div>
         </div>
 
@@ -76,9 +72,9 @@
         <div id="dimension" class="form-group hidden">
           <label class="control-label col-sm-2" for="email">Dimension:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control l-login-input-raw mb15" name="rm_dlength" placeholder="Length"  value="<?php echo $raw_info->rm_di_length; ?>" >
-            <input type="text" class="form-control l-login-input-raw mb15" name="rm_dwidth" placeholder="Width" value="<?php echo $raw_info->rm_di_width; ?>" >
-            <input type="text" class="form-control l-login-input-raw" name="rm_dheight" placeholder="Height" value="<?php echo $raw_info->rm_di_height; ?>" >
+            <input type="text" class="form-control l-login-input-raw mb15" name="rm_dlength" placeholder="Length">
+            <input type="text" class="form-control l-login-input-raw mb15" name="rm_dwidth" placeholder="Width">
+            <input type="text" class="form-control l-login-input-raw" name="rm_dheight" placeholder="Height">
           </div>
         </div>
 
@@ -121,19 +117,47 @@
           </a>
         </div>
 
-
-
       </form>
+      </div>
     </div>
   </div>
 </div>
 
+
+  <div class="modal fade" id="addRawType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;">
+        <?php
+          $att = array('class'=>'form-horizontal','autocomplete'=>'off');
+          echo form_open_multipart('Raw_Materials/save_rawtype',$att);
+        ?>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Add Raw Material type</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="" class="control-label col-sm-4">Raw Type Title</label>
+                <div class="col-sm-8">
+                  <input type="text" class="btn-default l-attach-input" name="raw_type">
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
     
 <script type="text/javascript">
 
     $(function(){
-
-
 
       $( "#raw_type" ).change(function() {
 
@@ -150,19 +174,6 @@
       }); //btnForgot
 
 
-
-
       }); // end function
-
-   window.onload = function() {
-        var raw_type = $( "#raw_type" ).val();
-
-        if(raw_type == 3){
-          $( "#dimension" ).removeClass( "hidden" );
-        }
-        else{
-          $( "#dimension" ).addClass( "hidden" );
-        }
-    };
 
   </script>

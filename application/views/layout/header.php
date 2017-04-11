@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/datatables/datatables.min.css') ?>">
-  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap-datepicker.standalone.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap-datepicker.standalone.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.min.css') ?>">
 
 	<script src="<?= base_url('assets') ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -40,7 +40,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?= base_url('assets/js/bootstrap-filestyle.min.js') ?>"></script>
 	<script type="text/javascript" src="<?= base_url('assets') ?>/js/jquery.uploadPreview.js"></script>
   <script type="text/javascript" src="<?= base_url('assets') ?>/js/bootstrap-datepicker.min.js"></script>
-	<script type="text/javascript" src="<?= base_url('assets') ?>/js/select2.min.js"></script>
+  <script type="text/javascript" src="<?= base_url('assets') ?>/js/select2.min.js"></script>
+	<script type="text/javascript" src="<?= base_url('assets') ?>/js/blockUI.js"></script>
+	<script type="text/javascript" src="<?= base_url('assets') ?>/js/phptojsformats.js"></script>
 
 	<!-- AdminLTE -->
 	<link rel="stylesheet" href="<?= base_url('assets') ?>/dist/css/AdminLTE.min.css">
@@ -213,18 +215,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="active"><a href="<?= base_url('auth/create_group') ?>"><i class="fa fa-group"></i> Create Group</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-tasks"></i> <span>Sales Order</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo base_url('salesorder'); ?>"><i class="fa fa-tags"></i> View Sales Order</a></li>
-            <li class="active"><a href="<?php echo base_url('salesorder/new'); ?>"><i class="fa fa-plus"></i> Create New Sales Order</a></li>
-          </ul>
-        </li>
+
+        <li><a href="<?php echo base_url('salesorder'); ?>"><i class="fa fa-tasks"></i> <span>Sales Orders</span></a></li>
+        <li><a href="<?php echo base_url('purchaseorder'); ?>"><i class="fa fa-tags"></i> <span>Purchase Orders</span></a></li>
+        <li><a href="<?php echo base_url('receipts'); ?>"><i class="fa fa-book"></i> <span>Receipts</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-tasks"></i> <span>Raw Materials</span>
@@ -285,6 +279,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="active"><a href="<?php echo base_url('pricelist/splist'); ?>"><i class="fa fa-file-archive-o"></i> Supplier Price List</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-money"></i> <span>Receiving</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?php echo base_url('receivingwh'); ?>"><i class="fa fa-file-archive-o"></i> Warehouse</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -299,7 +304,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= ($bcrumbs != '') ? $bcrumbs : 'Dashboard'; ?></li>
+        <li class="active"><?= ($bcrumbs != '' || $bcrumbs == undefined) ? $bcrumbs : 'Dashboard'; ?></li>
       </ol>
     </section>
     <!-- Main content -->

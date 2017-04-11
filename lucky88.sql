@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2016 at 01:24 AM
+-- Generation Time: Jan 06, 2017 at 11:04 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -28,26 +28,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `contact` (
   `contact_id` int(11) NOT NULL,
-  `comp_code` varchar(250) DEFAULT NULL,
-  `contact_type` varchar(250) DEFAULT NULL,
-  `agent` varchar(250) DEFAULT NULL,
-  `comp_name` varchar(250) DEFAULT NULL,
-  `payable_to` varchar(250) DEFAULT NULL,
-  `address` varchar(250) DEFAULT NULL,
-  `area` varchar(250) DEFAULT NULL,
-  `tin_num` varchar(250) DEFAULT NULL,
-  `cont_pers` varchar(250) DEFAULT NULL,
-  `telephone` varchar(250) DEFAULT NULL,
-  `mob_no` varchar(250) DEFAULT NULL,
-  `other_telephone` varchar(250) DEFAULT NULL,
-  `fax_num` varchar(250) DEFAULT NULL,
-  `email` varchar(250) DEFAULT NULL,
-  `website` varchar(250) DEFAULT NULL,
-  `prepared_by` varchar(250) DEFAULT NULL,
-  `update_by` varchar(250) DEFAULT NULL,
+  `comp_code` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contact_type` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `agent` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `comp_name` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `payable_to` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `area` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tin_num` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cont_pers` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telephone` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mob_no` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `other_telephone` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fax_num` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prepared_by` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `update_by` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `prep_date` date DEFAULT NULL,
   `up_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contact`
@@ -60,6 +60,29 @@ INSERT INTO `contact` (`contact_id`, `comp_code`, `contact_type`, `agent`, `comp
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cpfreights`
+--
+
+CREATE TABLE `cpfreights` (
+  `id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `charge` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `remarks` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `date_submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cpfreights`
+--
+
+INSERT INTO `cpfreights` (`id`, `contact_id`, `start_date`, `end_date`, `charge`, `remarks`, `date_submitted`) VALUES
+(1, 1, '2016-11-22', '2016-11-29', '21', 'test', '2016-11-17 17:31:35');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cplist`
 --
 
@@ -68,16 +91,29 @@ CREATE TABLE `cplist` (
   `contact_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(20) NOT NULL,
   `unit` int(11) NOT NULL,
   `less1` int(11) DEFAULT NULL,
   `less2` int(11) DEFAULT NULL,
   `less3` int(11) DEFAULT NULL,
   `disperbundle` int(11) NOT NULL,
-  `remarks` varchar(100) NOT NULL,
+  `remarks` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cplist`
+--
+
+INSERT INTO `cplist` (`id`, `contact_id`, `start_date`, `end_date`, `product_id`, `price`, `unit`, `less1`, `less2`, `less3`, `disperbundle`, `remarks`, `date_modified`) VALUES
+(4, 1, '2016-12-01', '2016-12-31', 'TEST100', 20, 20, 2, 5, 2, 2, 'test\r\n', '2016-12-15 03:42:27'),
+(5, 1, '2016-12-01', '2016-12-31', 'BGARJOHN', 200, 20, 2, 5, 2, 20, 'test', '2016-12-15 03:42:27'),
+(6, 2, '2016-12-01', '2016-12-31', 'BGARJOHN', 300, 0, 20, 20, 20, 5, 'test', '2016-12-08 04:02:13'),
+(7, 1, '2017-01-01', '2017-01-31', 'TEST100', 125, 0, 4, 4, 4, 4, 'test', '2017-01-03 06:51:19'),
+(8, 2, '2017-01-01', '2017-01-31', 'TEST100', 130, 0, 4, 4, 4, 4, 'test', '2017-01-03 06:51:24'),
+(9, 2, '2017-01-01', '2017-01-31', 'BGARJOHN', 145, 0, 4, 4, 4, 4, 'test', '2017-01-03 06:49:57'),
+(10, 1, '2017-01-01', '2017-01-31', 'BGARJOHN', 160, 0, 4, 4, 4, 4, 'test', '2017-01-03 06:50:18');
 
 -- --------------------------------------------------------
 
@@ -88,11 +124,20 @@ CREATE TABLE `cplist` (
 CREATE TABLE `cpstat` (
   `id` int(11) NOT NULL,
   `contact_id` int(11) NOT NULL,
-  `category` varchar(100) NOT NULL,
-  `terms` varchar(100) NOT NULL,
-  `limitation` varchar(100) NOT NULL,
+  `category` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `terms` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `limitation` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `days` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cpstat`
+--
+
+INSERT INTO `cpstat` (`id`, `contact_id`, `category`, `terms`, `limitation`, `days`, `date_modified`) VALUES
+(8, 1, '5000-50000', 'Cash Advance', 'No Limit', '', '2016-12-01 03:45:23'),
+(9, 2, 'Special', 'Consignment', 'No Limit', '', '2016-12-08 04:02:13');
 
 -- --------------------------------------------------------
 
@@ -102,23 +147,23 @@ CREATE TABLE `cpstat` (
 
 CREATE TABLE `employee` (
   `emp_id` int(11) NOT NULL,
-  `employee_id` varchar(15) DEFAULT NULL,
-  `fname` varchar(255) DEFAULT NULL,
-  `lname` varchar(255) DEFAULT NULL,
-  `mname` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `employee_id` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
-  `agency` varchar(255) DEFAULT NULL,
-  `contact_no` varchar(255) DEFAULT NULL,
-  `designation` varchar(255) DEFAULT NULL,
+  `agency` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contact_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `designation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hired_date` date DEFAULT NULL,
-  `sss` varchar(255) DEFAULT NULL,
-  `philhealth` varchar(255) DEFAULT NULL,
-  `pagibig` varchar(255) DEFAULT NULL,
+  `sss` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `philhealth` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pagibig` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `termination` date DEFAULT NULL,
-  `company` varchar(255) DEFAULT NULL,
-  `picture` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `company` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -128,9 +173,9 @@ CREATE TABLE `employee` (
 
 CREATE TABLE `groups` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `groups`
@@ -148,10 +193,59 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `login_attempts` (
   `id` int(11) UNSIGNED NOT NULL,
-  `ip_address` varchar(15) NOT NULL,
-  `login` varchar(100) NOT NULL,
+  `ip_address` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `soid` int(11) NOT NULL,
+  `product_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `unit` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `price` double NOT NULL,
+  `amount` double NOT NULL,
+  `less1` int(11) NOT NULL,
+  `less2` int(11) NOT NULL,
+  `less3` int(11) NOT NULL,
+  `date_submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `prod_id` int(11) NOT NULL,
+  `prod_code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bar_code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prod_type` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prod_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `brand_name` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prod_cat` int(11) DEFAULT NULL,
+  `prod_weight` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prod_pcs` int(11) DEFAULT NULL,
+  `prepared_by` int(11) DEFAULT NULL,
+  `last_edited_by` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`prod_id`, `prod_code`, `bar_code`, `prod_type`, `prod_name`, `brand_name`, `prod_cat`, `prod_weight`, `prod_pcs`, `prepared_by`, `last_edited_by`) VALUES
+(1, 'TEST100', '100', 'N', 'TEST PRODUCT', 'TEST', 4, '20', 20, NULL, NULL),
+(2, 'BGARJOHN', '00009', 'N', 'BIG ARJOHN XXX ', 'BRANDED XX', 1, '20', 20, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,8 +255,8 @@ CREATE TABLE `login_attempts` (
 
 CREATE TABLE `product_category` (
   `cat_id` int(11) NOT NULL,
-  `cat_title` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cat_title` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_category`
@@ -177,13 +271,30 @@ INSERT INTO `product_category` (`cat_id`, `cat_title`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_ingredients`
+--
+
+CREATE TABLE `product_ingredients` (
+  `ing_id` int(11) NOT NULL,
+  `prod_id` int(11) DEFAULT NULL,
+  `ing_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ing_qty` int(11) DEFAULT NULL,
+  `ing_unit` int(11) DEFAULT NULL,
+  `ing_material` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ing_startDate` date DEFAULT NULL,
+  `ing_endDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_unit`
 --
 
 CREATE TABLE `product_unit` (
   `unit_id` int(11) NOT NULL,
-  `unit` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `unit` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_unit`
@@ -201,11 +312,11 @@ INSERT INTO `product_unit` (`unit_id`, `unit`) VALUES
 
 CREATE TABLE `raw_materials` (
   `material_id` int(11) NOT NULL,
-  `rm_img` text,
-  `rm_code` varchar(20) NOT NULL,
-  `rm_name` text NOT NULL,
+  `rm_img` mediumtext COLLATE utf8_unicode_ci,
+  `rm_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `rm_name` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `rm_type` int(11) NOT NULL,
-  `rm_weight` varchar(10) NOT NULL,
+  `rm_weight` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `rm_pcs` int(11) NOT NULL,
   `rm_di_length` int(10) DEFAULT NULL,
   `rm_di_width` int(10) DEFAULT NULL,
@@ -214,7 +325,7 @@ CREATE TABLE `raw_materials` (
   `prepared_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_edited` int(11) NOT NULL,
   `last_edited_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `raw_materials`
@@ -223,7 +334,8 @@ CREATE TABLE `raw_materials` (
 INSERT INTO `raw_materials` (`material_id`, `rm_img`, `rm_code`, `rm_name`, `rm_type`, `rm_weight`, `rm_pcs`, `rm_di_length`, `rm_di_width`, `rm_di_height`, `prepared_by`, `prepared_date`, `last_edited`, `last_edited_date`) VALUES
 (1, 'images.png', 'Cor1002', 'Corazon', 3, '2', 2, 2, 2, 3, 1, '2016-10-15 07:46:07', 0, '2016-10-14 19:45:33'),
 (2, 'large2.jpg', 'asqwe', 'qwe', 2, '22', 3, 0, 0, 0, 1, '2016-10-14 20:31:39', 0, '0000-00-00 00:00:00'),
-(3, '10_VERMICELLI_60_kg_PHOTO.JPG', 'SR-60', '???? Sotanghon Red 60 kilos', 1, '60', 0, 0, 0, 0, 1, '2016-10-21 03:34:24', 0, '0000-00-00 00:00:00');
+(3, '10_VERMICELLI_60_kg_PHOTO.JPG', 'SR-60', '???? Sotanghon Red 60 kilos', 1, '60', 0, 0, 0, 0, 1, '2016-10-21 03:34:24', 0, '0000-00-00 00:00:00'),
+(4, 'item-banner.png', 'GPM100', '普通大件 test', 2, '20', 20, 0, 0, 0, 1, '2016-11-28 02:32:07', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -233,9 +345,9 @@ INSERT INTO `raw_materials` (`material_id`, `rm_img`, `rm_code`, `rm_name`, `rm_
 
 CREATE TABLE `raw_materials_type` (
   `rmt_id` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `is_show` varchar(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `is_show` varchar(1) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `raw_materials_type`
@@ -254,23 +366,26 @@ INSERT INTO `raw_materials_type` (`rmt_id`, `title`, `is_show`) VALUES
 
 CREATE TABLE `salesorder` (
   `id` int(11) NOT NULL,
-  `cpoNum` varchar(50) NOT NULL,
-  `poNum` varchar(50) NOT NULL,
-  `contactID` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `comp_code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `cpoNum` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `poNum` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_ordered` date NOT NULL,
-  `remarks` text NOT NULL,
+  `remarks` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `grosstotal` double DEFAULT NULL,
+  `dis1less` double DEFAULT NULL,
+  `dis2less` double DEFAULT NULL,
+  `dis3less` double DEFAULT NULL,
+  `netSales` double DEFAULT NULL,
+  `lessVAT12` double DEFAULT NULL,
+  `amountNetVAT` double DEFAULT NULL,
+  `pwdDis` double DEFAULT NULL,
+  `totalAmountDue` double DEFAULT NULL,
   `preparedby` int(11) NOT NULL,
   `lasteditby` int(11) NOT NULL,
   `date_submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `salesorder`
---
-
-INSERT INTO `salesorder` (`id`, `cpoNum`, `poNum`, `contactID`, `date_ordered`, `remarks`, `preparedby`, `lasteditby`, `date_submitted`, `date_modified`) VALUES
-(1, '11111', '111', 1, '2016-11-01', 'test', 11, 11, '2016-11-09 22:09:02', '0000-00-00 00:00:00');
+  `date_modified` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -280,31 +395,31 @@ INSERT INTO `salesorder` (`id`, `cpoNum`, `poNum`, `contactID`, `date_ordered`, 
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
-  `ip_address` varchar(45) NOT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `salt` varchar(255) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `activation_code` varchar(40) DEFAULT NULL,
-  `forgotten_password_code` varchar(40) DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `activation_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `forgotten_password_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   `forgotten_password_time` int(11) UNSIGNED DEFAULT NULL,
-  `remember_code` varchar(40) DEFAULT NULL,
+  `remember_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_on` int(11) UNSIGNED NOT NULL,
   `last_login` int(11) UNSIGNED DEFAULT NULL,
   `active` tinyint(1) UNSIGNED DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `company` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1478710386, 1, 'Ar', 'John', 'ADMIN', '0'),
-(2, '127.0.0.1', 'arjohn', '$2y$08$gS283kojHwGb7TIsf0rAIOM7WBOuX2yX5v3x.l7scAw.ZYaJ0SzwG', NULL, 'arjohn@admin.com', NULL, 'BhhPDqLczShZsuoTGgQv6.cc7a2757ba5a9fe53f', 1475979873, NULL, 1475978926, 1477604771, 1, 'Arjohn', 'Quijano', 'lucky88', '1234567890'),
+(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1482283729, 1, 'Ar', 'John', 'ADMIN', '0'),
+(2, '127.0.0.1', 'arjohn', '$2y$08$gS283kojHwGb7TIsf0rAIOM7WBOuX2yX5v3x.l7scAw.ZYaJ0SzwG', NULL, 'arjohn@admin.com', NULL, 'BhhPDqLczShZsuoTGgQv6.cc7a2757ba5a9fe53f', 1475979873, NULL, 1475978926, 1483578346, 1, 'Arjohn', 'Quijano', 'lucky88', '1234567890'),
 (3, '::1', 'heirocks', '$2y$08$fD.TQZMbjWiXn7IXdXGW5.K.w9fBPf7DgngS1qhY2/8XI9aWba8Ly', NULL, 'heiro.adriano@gmail.com', NULL, NULL, NULL, NULL, 1476098689, 1476188257, 1, 'Heiro', 'Adriano', 'admin', '09123456789');
 
 -- --------------------------------------------------------
@@ -342,6 +457,12 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`contact_id`);
 
 --
+-- Indexes for table `cpfreights`
+--
+ALTER TABLE `cpfreights`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cplist`
 --
 ALTER TABLE `cplist`
@@ -373,10 +494,28 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`prod_id`);
+
+--
 -- Indexes for table `product_category`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Indexes for table `product_ingredients`
+--
+ALTER TABLE `product_ingredients`
+  ADD PRIMARY KEY (`ing_id`);
 
 --
 -- Indexes for table `product_unit`
@@ -427,15 +566,20 @@ ALTER TABLE `users_groups`
 ALTER TABLE `contact`
   MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `cpfreights`
+--
+ALTER TABLE `cpfreights`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `cplist`
 --
 ALTER TABLE `cplist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `cpstat`
 --
 ALTER TABLE `cpstat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `employee`
 --
@@ -452,10 +596,25 @@ ALTER TABLE `groups`
 ALTER TABLE `login_attempts`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `product_ingredients`
+--
+ALTER TABLE `product_ingredients`
+  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product_unit`
 --
@@ -465,7 +624,7 @@ ALTER TABLE `product_unit`
 -- AUTO_INCREMENT for table `raw_materials`
 --
 ALTER TABLE `raw_materials`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `raw_materials_type`
 --
@@ -475,7 +634,7 @@ ALTER TABLE `raw_materials_type`
 -- AUTO_INCREMENT for table `salesorder`
 --
 ALTER TABLE `salesorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --

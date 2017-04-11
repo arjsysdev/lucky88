@@ -1,4 +1,5 @@
 <table class="table table-bordered table-striped table-hover table-condensed text-center data-table">
+	<a class="btn btn-primary pull-right" href="<?php echo base_url("Employee");?>">Add Employee</a>
 	<thead>
 		<th>Employee ID</th>
 		<th>Image</th>
