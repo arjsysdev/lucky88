@@ -24,7 +24,7 @@
 		public function index(){
 			$data['title'] = 'Receipts';
 			$data['bcrumbs'] = 'Receipts';
-
+			$data['error'] = '';
 			if($this->input->get('po') != null){
 				$po = $this->input->get('po');
 				$data['info'] = $this->salesorder->getByPOID($po);	
