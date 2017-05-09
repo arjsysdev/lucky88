@@ -1,0 +1,35 @@
+/* --------------------------------------------
+Description: Peace Without Limits - PWL
+Author: Norman Reginald A. Quijano
+Author URL: http://www.noerksallies.com/
+Version: 1.0
+-------------------------------------------- */
+html, body{width: 100%;height: 100%;font-family: 'Light';font-weight: normal;font-style: normal;}
+.cover{width: 100%;height: 100%;display: flex;align-items: center;background: #222 url('../img/phil-island-cover.jpg') top center no-repeat;}
+.cover img{margin-bottom: 50px;}.cover p{margin-top: 50px;}.cover a{text-decoration: none;}.cover a:hover{text-decoration: none;}.cover a:link{text-decoration: none;}.cover a:active{text-decoration: none;}.cover a:visited{text-decoration: none;}.cover a:focus{text-decoration: none;}
+
+/* System Login Butt */
+.btn-system{background-color: #4caf50;border-color: #449d48;color: #fff;margin-top:5px;margin-bottom:5px;margin-bottom:5px;padding:15px 35px;transition: all 0.5s ease 0s;}
+.btn-system:hover{background-color: rgba(61, 139, 64, 1.0);color: #fff;margin-top:5px;margin-bottom:5px;padding:15px 35px;}
+.btn-system:hover,
+.btn-system:focus,
+.btn-system.focus {color: #fff;text-decoration: none;}
+
+/* Email Login Butt */
+.btn-email{background-color: #009ed6;border-color: #008bbd;color: #fff;margin-top:5px;margin-bottom:5px;padding:15px 35px;transition: all 0.5s ease 0s;}
+.btn-email:hover{background-color: rgba(0, 120, 163, 1.0);color: #fff;margin-top:5px;margin-bottom:5px;padding:15px 35px;}
+.btn-email:hover,
+.btn-email:focus,
+.btn-email.focus {color: #fff;text-decoration: none;}
+
+.fphil{
+	background: -webkit-linear-gradient(#fff00f, #ea643e);
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+  }
+  .fphil:hover{
+	background: -webkit-linear-gradient(#fff00f, #ea643e);
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: #000;
+  }
+.fwhite{color: #fff !important;}

@@ -47,6 +47,10 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	public function homepage(){
+		$this->load->view('auth/homepage');
+	}
+
 	// log the user in
 	public function login()
 	{

@@ -1,0 +1,12 @@
+/* --------------------------------------------
+Description: Peace Without Limits - PWL
+Author: Norman Reginald A. Quijano
+Author URL: http://www.noerksallies.com/
+Version: 1.0
+-------------------------------------------- */
+
+/* -------------------------------------------- Typography -------------------------------------------- */
+
+/* Light */
+@font-face{font-family: 'Light';src: url('../fonts/montserrat-light-webfont.eot');src: url('../fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/montserrat-light-webfont.woff2') format('woff2'),url('../fonts/montserrat-light-webfont.woff') format('woff'),url('../fonts/montserrat-light-webfont.ttf') format('truetype'),url('../fonts/montserrat-light-webfont.svg#montserratlight') format('svg');font-weight: normal;font-style: normal;}
+.light{font-family: 'Light';font-weight: normal;font-style: normal;}
