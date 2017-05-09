@@ -22,7 +22,7 @@
 					<div class="form-group">
 						<label for="contact_type">Type:</label>
 						<select type="text" class="form-control l-login-input" name="contact_type"  id="contact_type" >
-							<option value="Agency">Agency</option>
+							<option value="Service Provider">Service Provider</option>
 							<option value="Customer">Customer</option>
 							<option value="Supplier">Supplier</option>
 							<option value="Both">Both</option>
