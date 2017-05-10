@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2017 at 09:54 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: May 10, 2017 at 09:14 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -54,9 +54,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`contact_id`, `comp_code`, `contact_type`, `agent`, `comp_name`, `payable_to`, `address`, `area`, `tin_num`, `cont_pers`, `telephone`, `mob_no`, `other_telephone`, `fax_num`, `email`, `website`, `prepared_by`, `update_by`, `prep_date`, `up_date`) VALUES
-(1, 'ARJOHN', 'Customer', '', 'Arjohn Group of Companies', 'test', 'test', 'Area1', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'admin', 'admin', '0000-00-00', '2016-11-02'),
-(2, 'RRX', 'Both', '', 'RRX Subsidiary of Arjohn Corp. ', 'Arjohn Quijano', 'Quijano St.', 'Area1', '12345678', 'Arjohn QUijano', '123', '123456789', '123', '123456789', 'arjohn.official@gmail.com', 'argofc.com', 'admin', NULL, '2016-11-02', NULL),
-(3, 'ABC100', 'Supplier', '', 'Abaca 100', 'Arjohn', 'Planet Mars', 'Area1', '7894561230', 'Arjohn', '123456879', '0123456789', '123456789', '123456789', 'arjohn@abaca100.com', 'www.abaca100.com', 'arjohn', NULL, '2017-01-13', NULL);
+(1, 'IOSI', 'Supplier', '', 'Inkline Office Solutions, Inc.', 'Inkline Office Solutions, Inc.', '429 Martinez Street Brgy. Plainview Mandaluyong City', 'Area1', '009-074-643-000', 'Maryrose Ann A. Hallig', '7360672', '09363268253', '5340722', '5352926', 'roseannhallig@yahoo.com', 'www.inklinesolutions.com', 'klyeung@lucky888food.com', NULL, '2017-05-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,8 +282,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`prod_id`, `prod_code`, `bar_code`, `prod_type`, `prod_name`, `brand_name`, `prod_cat`, `prod_weight`, `prod_pcs`, `prepared_by`, `last_edited_by`) VALUES
-(1, 'TEST100', '100', 'N', 'TEST PRODUCT', 'TEST', 4, '20', 20, NULL, NULL),
-(2, 'BGARJOHN', '00009', 'N', 'BIG ARJOHN XXX ', 'BRANDED XX', 1, '20', 20, NULL, NULL);
+(3, 'PHNW-12', '4809013825879', 'N', 'Nata de Coco (Coconut Gel) White', 'Philippine Island', 2, '12 oz', 24, NULL, NULL),
+(4, 'PHKW-12', '4809013825077', 'N', 'Sugar Palm Fruit (Kaong White)', 'Philippine Island', 2, '12 oz', 24, NULL, NULL),
+(5, 'PHP-227', '4806501828695', 'N', 'Pancit Palabok', 'Philippine Island', 4, '8 oz', 30, NULL, NULL),
+(6, 'PHKG-12', '4809013825107', 'N', 'Sugar Palm Fruit Kaong Green', 'Philippine Island', 4, '12 oz', 24, NULL, NULL),
+(7, 'PHNR-12', '4809013825022', 'N', 'Nata de Coco Red (Coconut Gel)', 'Philippine Island', 2, '12 oz', 24, NULL, NULL),
+(8, 'PHRMB-32', '4809013825695', 'N', 'Red Mung Beans (Red Mongo)', 'Philippine Islands', 2, '907 g', 12, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -402,16 +404,6 @@ CREATE TABLE `raw_materials` (
   `last_edited` int(11) NOT NULL,
   `last_edited_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `raw_materials`
---
-
-INSERT INTO `raw_materials` (`material_id`, `rm_img`, `rm_code`, `rm_name`, `rm_type`, `rm_weight`, `rm_pcs`, `rm_di_length`, `rm_di_width`, `rm_di_height`, `prepared_by`, `prepared_date`, `last_edited`, `last_edited_date`) VALUES
-(1, 'images.png', 'Cor1002', 'Corazon', 3, '2', 2, 2, 2, 3, 1, '2016-10-15 07:46:07', 0, '2016-10-14 19:45:33'),
-(2, 'large2.jpg', 'asqwe', 'qwe', 2, '22', 3, 0, 0, 0, 1, '2016-10-14 20:31:39', 0, '0000-00-00 00:00:00'),
-(3, '10_VERMICELLI_60_kg_PHOTO.JPG', 'SR-60', '???? Sotanghon Red 60 kilos', 1, '60', 0, 0, 0, 0, 1, '2016-10-21 03:34:24', 0, '0000-00-00 00:00:00'),
-(4, 'item-banner.png', 'GPM100', '普通大件 test', 2, '20', 20, 0, 0, 0, 1, '2016-11-28 02:32:07', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -662,9 +654,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1491791707, 1, 'Ar', 'John', 'ADMIN', '0'),
+(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'zuiEytRQPiHyoo6QntXc6u', 1268889823, 1494313395, 1, 'Ar', 'John', 'ADMIN', '0'),
 (2, '127.0.0.1', 'arjohn', '$2y$08$gS283kojHwGb7TIsf0rAIOM7WBOuX2yX5v3x.l7scAw.ZYaJ0SzwG', NULL, 'arjohn@admin.com', NULL, 'BhhPDqLczShZsuoTGgQv6.cc7a2757ba5a9fe53f', 1475979873, NULL, 1475978926, 1484631477, 1, 'Arjohn', 'Quijano', 'lucky88', '1234567890'),
-(3, '::1', 'heirocks', '$2y$08$fD.TQZMbjWiXn7IXdXGW5.K.w9fBPf7DgngS1qhY2/8XI9aWba8Ly', NULL, 'heiro.adriano@gmail.com', NULL, NULL, NULL, NULL, 1476098689, 1476188257, 1, 'Heiro', 'Adriano', 'admin', '09123456789');
+(3, '::1', 'heirocks', '$2y$08$fD.TQZMbjWiXn7IXdXGW5.K.w9fBPf7DgngS1qhY2/8XI9aWba8Ly', NULL, 'heiro.adriano@gmail.com', NULL, NULL, NULL, NULL, 1476098689, 1476188257, 1, 'Heiro', 'Adriano', 'admin', '09123456789'),
+(4, '::1', 'mainadmin', '$2y$08$u98f96aBHCwPSUVhON3vRuQbV9PCv2F9MIce1vfVooa179LLzLoQ2', NULL, 'main@local.host', NULL, NULL, NULL, NULL, 1492413639, 1492413741, 1, 'Main', 'Admin', 'lucky888', '123456789'),
+(5, '::1', 'vrvillaruz@lucky888food.com', '$2y$08$/9yJSp5hfC3lGASFTHb2COh020t1KEEhpa191Fez26eZX90Obxh1C', NULL, 'vrvillaruz@lucky888food.com', NULL, NULL, NULL, 'PpWcdJxu0SzZeHmS/ZFB2u', 1492786598, 1493041919, 1, 'Virginia', 'Villaruz', 'Lucky 888 Food International, Inc.', '287-47-63'),
+(6, '::1', 'pyeung@lucky888food.com', '$2y$08$p9mGyJhBBqB4nYpMIk8BIe/r.5k.TQJv1ysDiL.M6F2DxQ9v7oDGG', NULL, 'pyeung@lucky888food.com', NULL, NULL, NULL, NULL, 1493041509, 1493041774, 1, 'Perlinda', 'Yeung', 'Lucky 888 Food International, Inc.', '9853790'),
+(7, '112.210.132.251', 'klyeung@lucky888food.com', '$2y$08$xhMAcLSDjpm7.Owd31WJkeO8alb6YY4Ws2BeDWv4.4femo.t9BKNq', NULL, 'klyeung@lucky888food.com', NULL, NULL, NULL, NULL, 1493042644, 1494388343, 1, 'Karen', 'Yeung', 'Lucky 888 Food International, Inc.', '7754410'),
+(8, '112.210.132.251', 'jmserive@lucky888food.com', '$2y$08$pUITMjSCoUOCgFzSbrtUPOqCwcdGzRZNLQ9CniaDclg27sG.eo1wq', NULL, 'jmserive@lucky888food.com', NULL, NULL, NULL, NULL, 1493047663, NULL, 1, 'Jeanelle Mildred', 'Erive', 'Lucky 888 Food International, Inc.', '3617773'),
+(9, '112.210.132.251', 'mgnabapo@lucky888food.com', '$2y$08$YC3gQ1DczEJtQx8Q3HkjsOMJ40gQKE9bZU85R5ji4vbL0/mSpcWry', NULL, 'mgnabapo@lucky888food.com', NULL, NULL, NULL, NULL, 1493196253, 1494029357, 1, 'Mitsy Glade', 'Abapo', 'Lucky 888 Food International, Inc.', '362-10-23'),
+(10, '122.53.231.115', 'kathylimyeung@lucky888food.com', '$2y$08$szzZm..r3Hi0d0QeaXMx4.UygCIDXAhmYcP1hv8j/lABil8GqFVPq', NULL, 'kathylimyeung@lucky888food.com', NULL, NULL, NULL, NULL, 1493873275, NULL, 1, 'Kathy', 'Yeung', 'Lucky 888 Food International, Inc.', '3617773'),
+(11, '112.202.175.101', 'mpmaceda@lucky888food.com', '$2y$08$0IuMDV0X4faQANhX2Wt7MOzah.3t4lzMCOPN3J8HBp73msCOUtJgK', NULL, 'mpmaceda@lucky888food.com', NULL, NULL, NULL, NULL, 1494396056, 1494396397, 1, 'Manilyn', 'Maceda', 'Lucky 888 Food International, Inc.', '2874763');
 
 -- --------------------------------------------------------
 
@@ -688,7 +688,20 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (6, 2, 1),
 (7, 2, 2),
 (9, 3, 1),
-(10, 3, 2);
+(10, 3, 2),
+(12, 4, 1),
+(13, 4, 2),
+(27, 5, 1),
+(28, 5, 2),
+(24, 6, 1),
+(25, 6, 2),
+(22, 7, 1),
+(23, 7, 2),
+(30, 8, 1),
+(31, 8, 2),
+(38, 9, 2),
+(37, 10, 2),
+(39, 11, 2);
 
 --
 -- Indexes for dumped tables
@@ -862,7 +875,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cpfreights`
 --
@@ -907,7 +920,7 @@ ALTER TABLE `porder_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `product_category`
 --
@@ -932,7 +945,7 @@ ALTER TABLE `purchaseorder`
 -- AUTO_INCREMENT for table `raw_materials`
 --
 ALTER TABLE `raw_materials`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `raw_materials_type`
 --
@@ -982,12 +995,12 @@ ALTER TABLE `spstat`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- Constraints for dumped tables
 --
