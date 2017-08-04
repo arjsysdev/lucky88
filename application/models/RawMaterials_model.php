@@ -21,7 +21,9 @@
 			return $this->db->insert($table,$data);
 		}
 
-
+		public function getAll(){
+			return $this->db->get('raw_materials')->result();
+		}
 
 
 

@@ -52,6 +52,20 @@ class Purchaseorder_model extends CI_Model {
 		}
 	}
 
+	public function getPOItemByID($id){
+		if(!empty($id)){
+			$this->db->where('id', $id);
+			return $this->db->get($this->_items)->row();
+		}
+	}
+
+	public function getCustomerByCC($cc){
+		if($cc){
+			$this->db->where('comp_code', $cc);
+			return $this->db->get('contact')->row();
+		}
+	}
+
 }
 
 ?>

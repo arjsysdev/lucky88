@@ -101,14 +101,14 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="">Prepared By:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control " disabled  value="<?php echo $u_info->first_name.' '.$u_info->last_name; ?>" >
+            <input type="text" class="form-control " disabled  value="" >
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-sm-2" for="">Last Edited By:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control " disabled  value="<?php echo $u_info->first_name.' '.$u_info->last_name; ?>" >
+            <input type="text" class="form-control " disabled  value="" >
           </div>
         </div>
 
@@ -160,7 +160,15 @@
 
 			var count = $("#table_holder tr").length;
      
-			var row = '<tr id="row'+count+'"><td><input class="check_item" name="checker[]" type="checkbox"/></td><td><input type="text" required name="ing_startDate[]" class="form-control datepicker" /></td><td><input type="text" required name="ing_endDate[]" class="form-control datepicker" /></td><td><select required="" class="form-control" name="ing_name[]" "><option value="">-Select-</option> <?php foreach ($raw_type as $key) { echo "<option value=".$key->rmt_id.">".$key->title."</option>"; } ?> </select></td><td><input type="number" class="form-control" name="ing_qty[]" ></td><td><select required="" class="form-control" name="ing_unit[]" id=""><option value="">-Select-</option><?php foreach ($prod_unit as $key) { echo "<option value=".$key->unit_id.">".$key->unit."</option>"; } ?> </select> </td> <td> <select required="" class="form-control" name="ing_mat[]" "><option value="">-Select-</option> <?php foreach ($raw_materials as $key) { echo "<option value=".$key->rm_name.">".$key->rm_name."</option>"; } ?> </select> </td></tr>';
+      var options = "";
+      <?php 
+        foreach($raw_materials as $key){ 
+      ?>
+        options += '<option value="<?php echo $key->rm_name ?>"><?php echo $key->rm_name ?></option>';
+      <?php
+        }
+      ?>
+			var row = '<tr id="row'+count+'"><td><input class="check_item" name="checker[]" type="checkbox"/></td><td><input type="text" required name="ing_startDate[]" class="form-control datepicker" /></td><td><input type="text" required name="ing_endDate[]" class="form-control datepicker" /></td><td><select required="" class="form-control" name="ing_name[]" "><option value="">-Select-</option><?php foreach ($raw_type as $key) { echo "<option value=".$key->rmt_id.">".$key->title."</option>"; } ?></select></td><td><input type="number" class="form-control" name="ing_qty[]" ></td><td><select required="" class="form-control" name="ing_unit[]" id=""><option value="">-Select-</option><?php foreach ($prod_unit as $key) { echo "<option value=".$key->unit_id.">".$key->unit."</option>"; } ?></select></td><td><select required="" class="form-control" name="ing_mat[]" "><option value="">-Select-</option>'+options+'</select></td></tr>';
           
 			$('#table_holder').append(row);
 		  
@@ -176,38 +184,8 @@
       $( "#removeIngredient" ).click(function() {
 			// $("input[name='check_row[]']:checked").each(function(){
 				$('tr:has(input[name="checker[]"]:checked)').remove();
-		$("input:checkbox").prop("checked", false);
-      }); //addIngredient
-
-      //var trc = $("#table_holder tr").length;
-
-        // $( '#raw_type').change(function() {
-        //   var raw_type = $( "#raw_type" ).val();
-         
-        //   $.ajax({
-        //     url: '<?php echo base_url('Products/get_materials'); ?>/'+raw_type, //controller function
-        //     dataType: "json",
-        //     success: function(data){
-
-        //       $('#prod_mat option').remove();
-        //       var limit = data[0].length;
-
-        //       var row = '<option value="">-Select-</option>';
-              
-        //       if(limit != 0 ){
-        //         var ctr = 0;
-                
-        //         while(ctr <= (limit-1)){
-        //           row = row+'<option>'+data[2][ctr]+'</option>';
-
-        //           ctr++;
-        //         }
-        //       }
-        //       $('#prod_mat'+ctr).html(row);
-        //     }
-        //   });
-        // }); //change
-     
+		    $("input:checkbox").prop("checked", false);
+      }); 
 
 
 

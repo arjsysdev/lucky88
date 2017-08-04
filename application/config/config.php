@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//Custom Item
+
+$config['company_name'] = 'Lucky888';
+$config['short_name'] = 'L888';
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

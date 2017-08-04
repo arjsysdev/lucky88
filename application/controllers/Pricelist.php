@@ -65,12 +65,13 @@
 		}
 
 		public function addsprice(){
-
-			$raw['start_date'] = date('Y-m-d', strtotime($this->input->post('start_date')));
-			$raw['end_date'] = date('Y-m-d', strtotime($this->input->post('end_date')));
+			$raw['start_date'] = $this->input->post('start_date');
+			$raw['end_date'] = $this->input->post('end_date');
 			$raw['product_id'] = $this->input->post('product_id');
 			$raw['contact_id'] = $this->input->post('contact_id');
 			$raw['price'] = $this->input->post('price');
+			$raw['price2'] = $this->input->post('price2');
+			$raw['mooq'] = $this->input->post('mooq');
 			$raw['unit'] = $this->input->post('unit');
 			$raw['less1'] = $this->input->post('less1');
 			$raw['less2'] = $this->input->post('less2');
@@ -82,8 +83,10 @@
 				$old = array();
 			}
 			array_push($old, $raw);
+
 			$this->session->set_userdata('plist', $old);
 			$new = $this->session->userdata('plist');
+			
 			redirect('pricelist/splist?customer='.$this->input->post('contact_id'));
 		}
 
@@ -168,7 +171,7 @@
 		public function deletesprice($id=null, $customer){
 			if($id != null){
 				$this->pricelist->deleteSPriceByID($id);
-				redirect('pricelist/cplist?customer='.$customer);
+				redirect('pricelist/splist?customer='.$customer);
 			}
 		}
 
@@ -233,7 +236,7 @@
 			$data['title'] = 'Supplier Price List';
 			$data['bcrumbs'] = 'Supplier Price List';
 			$data['customers'] = $this->pricelist->getContactsSupplier();
-			$data['products'] = $this->common->get_all('products');
+			$data['rawmats'] = $this->common->get_all('raw_materials');
 			
 			
 			$selectedCustomer = $this->input->get('customer');

@@ -10,6 +10,7 @@
 			$this->load->model('Common_model', 'common');
 			$this->load->model('Contacts_model', 'contacts');
 			$this->load->model('Products_model', 'products');
+			$this->load->model('RawMaterials_model', 'rawmats');
 			$this->load->model('Pricelist_model', 'pricelist');
 			$this->load->model('Purchaseorder_model', 'purchaseorder');
 			if (!$this->ion_auth->logged_in())
@@ -28,18 +29,38 @@
 		}
 
 		public function view($id){
-			$data['title'] = 'Sales Orders';
-			$data['bcrumbs'] = 'Sales Orders';
+			$data['title'] = 'View Purchase Order';
+			$data['bcrumbs'] = 'View Purchase Order';
 			if($id){
+				$data['id'] = $id;
 				$data['order'] = $this->purchaseorder->getByID($id);
 				$data['items'] = $this->purchaseorder->getItemsBySOID($id);
 			
-				$this->_render_page('sales/view', $data);
+				$this->_render_page('purchase/view', $data);
 			}
 			else{
 				show_404();
 			}
 			
+		}
+
+		public function printReceipt($id){
+			$data['title'] = 'Sales Orders';
+			$data['bcrumbs'] = 'Sales Orders';
+			if($id){
+				$data['id'] = $id;
+				$data['order'] = $this->purchaseorder->getByID($id);
+				$data['customer'] = $this->purchaseorder->getCustomerByCC($data['order']->comp_code);
+				
+				$data['items'] = $this->purchaseorder->getItemsBySOID($id);
+				//debug($data, 1);
+				$this->viewdata = (empty($data)) ? $this->data: $data;
+				$this->load->view('purchase/printReceipt', $this->viewdata);		
+			}
+			else{
+				show_404();
+			}
+
 		}
 
 
@@ -49,7 +70,22 @@
 
 			$data['contacts'] = $this->contacts->getBothPO();
 			$data['products'] = $this->products->getAll();
+			$data['rawmats'] = $this->rawmats->getAll();
 			$this->_render_page('purchase/formadd', $data);
+
+		}
+
+		public function getitems($code){
+			if($code){
+				$contact = $this->contacts->getByCodeRow($code);
+				$itempl = $this->pricelist->getPriceListByIDSupplier($contact->contact_id);
+				$str = '';
+				foreach($itempl as $item){
+					$str .= '<option value="'.$item->product_id.'">'.$item->product_id.'</option>';
+				}
+
+				echo $str;
+			}
 
 		}
 
@@ -59,6 +95,8 @@
 			$save['poNum'] = $this->input->post('poNum');
 			$save['comp_code'] = $this->input->post('comp_code');
 			$save['date_ordered'] = $this->input->post('date_ordered');
+			$save['date_deliver'] = $this->input->post('date_deliver');
+			$save['delivery_at'] = $this->input->post('delivery_at');
 			$save['remarks'] = $this->input->post('remarks');
 			$save['preparedby'] = 0;
 			$save['lasteditby'] = 0;
@@ -84,7 +122,7 @@
 		}
 
 		public function formprice(){
-			$data['title'] = 'Sales Order Prices';
+			$data['title'] = 'Purchase Prices';
 			$data['bcrumbs'] = 'Sales Order Prices';
 			$data['purchaseorder'] = $this->session->userdata('purchaseorder');
 
@@ -109,6 +147,7 @@
 			$saveSO['comp_code'] = $post['comp_code'];
 			$saveSO['poNum'] = $post['poNum'];
 			$saveSO['date_ordered'] = date('Y-m-d', strtotime($post['date_ordered']));
+			$saveSO['date_deliver'] = date('Y-m-d', strtotime($post['date_deliver']));
 			$saveSO['remarks'] = $post['remarks'];
 			$saveSO['grosstotal'] = round($post['grosstotal'], 2);
 			$saveSO['dis1less'] = round($post['dis1less'], 2);

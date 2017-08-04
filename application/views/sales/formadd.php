@@ -60,13 +60,6 @@
 						<div class="input-group">
 							<select class="form-control" id="products">
 								<option value="">-Select-</option>
-								<?php
-									foreach($products as $product){
-								?>
-									<option value="<?= $product->prod_code ?>"><?= $product->prod_code ?></option>
-								<?php
-									}
-								?>
 							</select>
 							<span class="input-group-btn">
 							  <button class="btn btn-default" type="button" id="btnProduct">Select</button>
@@ -118,6 +111,13 @@
 				url: '<?= base_url("ajax/getnumber") ?>/'+code,
 				success: function(data){
 					$('#so').val(data);
+					console.log(data);
+				}
+			});
+			$.ajax({
+				url: '<?= base_url("salesorder/getitems") ?>/'+code,
+				success: function(data){
+					$('#products').html(data);
 					console.log(data);
 				}
 			});

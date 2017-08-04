@@ -36,7 +36,6 @@ class RawMaterials extends CI_Controller {
 			$mid = $_GET['r'];
 			$sql = "SELECT  * FROM raw_materials WHERE material_id='$mid'";
 			$this->data['raw_info'] = $this->cm->get_query($sql,1);	
-
 			$this->_render_page('raw_material/update_addtional', $this->data);
 		}
 		else{

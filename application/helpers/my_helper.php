@@ -99,14 +99,21 @@
 		return $value;
 	}
 
-	function getProductSupplierPrice($pcode, $contact, $dateorder){
+	function getProductSupplierPrice($pcode, $contact, $dateorder, $qty){
 		$CI =& get_instance();	
 
 		$CI->load->model('Pricelist_model', 'Pricelist');
 		$price = $CI->Pricelist->getProductSupplierPrice($pcode, $contact, $dateorder);
 		$value = 0;
 		if(!empty($price)){
-			$value = $price->price;
+
+			if($qty <= $price->mooq){
+				$value = $price->price;
+			}
+			else{
+				$value = $price->price2;
+			}
+			
 		}
 		return $value;
 	}

@@ -134,8 +134,10 @@
 														<tr>
 															<td>Start Date</td>
 															<td>End Date</td>
-															<td>Product</td>
+															<td>Raw Materials</td>
 															<td>Unit Price</td>
+															<td>Unit Price2</td>
+															<td>MOOQ</td>
 															<td>Unit</td>
 															<td>Less</td>
 															<td>Less</td>
@@ -155,6 +157,8 @@
 																<td><?= $price->end_date ?></td>
 																<td><?= $price->product_id ?></td>
 																<td><?= $price->price ?></td>
+																<td><?= $price->price2 ?></td>
+																<td><?= $price->mooq ?></td>
 																<td><?= $price->unit ?></td>
 																<td><?= $price->less1 ?></td>
 																<td><?= $price->less2 ?></td>
@@ -177,6 +181,8 @@
 																<td><?= $price['end_date'] ?></td>
 																<td><?= $price['product_id'] ?></td>
 																<td><?= $price['price'] ?></td>
+																<td><?= $price['price2'] ?></td>
+																<td><?= $price['mooq'] ?></td>
 																<td><?= $price['unit'] ?></td>
 																<td><?= $price['less1'] ?></td>
 																<td><?= $price['less2'] ?></td>
@@ -282,26 +288,26 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="">Start Date:</label>
-							<input type="text" class="form-control datepicker" id="start_date" name="start_date" >
+							<input type="date" class="form-control" name="start_date" >
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="">End Date:</label>
-							<input type="text" class="form-control datepicker" id="end_date" name="end_date">
+							<input type="date" class="form-control" name="end_date"  value="2050-12-01">
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
-							<label for="">Product:</label>
-							<select class="form-control" id="selectProduct" name="product_id">
+							<label for="">Items:</label>
+							<select class="form-control" id="selectProduct" name="product_id" required>
 								<option value="">-SELECT</option>
 								<?php
-									foreach($products as $product){
+									foreach($rawmats as $rawmat){
 								?>
-									<option value="<?= $product->prod_code ?>"><?php echo $product->prod_code ?></option>
+									<option value="<?= $rawmat->rm_code ?>"><?php echo $rawmat->rm_code ?></option>
 								<?php
 									}
 								?>
@@ -310,16 +316,28 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label for="">Unit:</label>
 							<input type="text" class="form-control" id="" name="unit">
 						</div>	
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<div class="form-group">
-							<label for="">Unit Price:</label>
-							<input type="number" class="form-control" id="" name="price">
+							<label for="">Unit Price 1:</label>
+							<input type="text" class="form-control" id="" name="price">
+						</div>	
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="">Unit Price 2:</label>
+							<input type="text" class="form-control" id="" name="price2">
+						</div>	
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="">MOOQ:</label>
+							<input type="text" class="form-control" id="" name="mooq">
 						</div>	
 					</div>
 				</div>
@@ -327,19 +345,19 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 1 (%):</label>
-							<input type="number" class="form-control" id="" name="less1">
+							<input type="text" class="form-control" id="" name="less1">
 						</div>	
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 2 (%):</label>
-							<input type="number" class="form-control" id="" name="less2">
+							<input type="text" class="form-control" id="" name="less2">
 						</div>	
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 3 (%):</label>
-							<input type="number" class="form-control" id="" name="less3">
+							<input type="text" class="form-control" id="" name="less3">
 						</div>	
 					</div>
 				</div>
@@ -386,7 +404,7 @@
 	       		<div class="col-md-6">
 					<div class="form-group">
 						<label for="">End Date:</label>
-						<input type="text" class="form-control datepicker" id="end_dateFreight" name="end_date" >
+						<input type="date" class="form-control" id="end_dateFreight" name="end_date" value="12-31-2050" >
 					</div>
 	       		</div>
 	       	</div>
@@ -425,12 +443,17 @@ $(document).ready(function(){
     $("#start_date").datepicker({
         todayBtn:  1,
         autoclose: true,
+        format: 'mm-dd-yyyy'
     }).on('changeDate', function (selected) {
         var minDate = new Date(selected.date.valueOf());
         $('#end_date').datepicker('setStartDate', minDate);
     });
 
-    $("#end_date").datepicker()
+    $("#end_date").datepicker({
+        todayBtn:  1,
+        autoclose: true,
+        format: 'mm-dd-yyyy'
+    })
         .on('changeDate', function (selected) {
             var minDate = new Date(selected.date.valueOf());
             $('#start_date').datepicker('setEndDate', minDate);

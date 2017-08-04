@@ -39,7 +39,8 @@
                 <td><?php echo $key->cat_title; ?></td>
                 <td><?php echo $key->prod_pcs; ?></td>
                 <td>
-                    <a href="<?php echo base_url('Products/additional?p='.$key->prod_id); ?>" >Edit</a>
+                    <a class="btn btn-primary btn-xs" href="<?php echo base_url('Products/additional?p='.$key->prod_id); ?>" ><i class="fa fa-pencil"></i></a> | 
+                    <a class="btn btn-primary btn-xs" href="<?php echo base_url('Products/viewing/'.$key->prod_id); ?>" onclick="return popitup(this)" ><i class="fa fa-eye"></i> View Ingredients</a>
                 </td>
               </tr>
             <?php
@@ -56,3 +57,12 @@
         </table>
       </div>
     </div>
+
+<script type="text/javascript">
+  function popitup(a){
+    var w = window.open(a.href,
+        a.target||"_blank",
+        'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=no,resizable=no,dependent,width=800,height=620,left=0,top=0');
+    return w?false:true; // allow the link to work if popup is blocked
+  }
+</script>

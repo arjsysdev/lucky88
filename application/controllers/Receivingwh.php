@@ -14,6 +14,7 @@
 			$this->load->model('Purchaseorder_model', 'purchaseorder');
 			$this->load->model('Salesorder_model', 'salesorder');
 			$this->load->model('Receipts_model', 'receipts');
+			$this->load->model('Receivingwr_model', 'receivingwr');
 			if (!$this->ion_auth->logged_in())
 			{
 				redirect('auth/login', 'refresh');
@@ -25,7 +26,9 @@
 			$data['title'] = 'Receiving (Warehouse)';
 			$data['bcrumbs'] = 'Receiving (Warehouse)';
 			$data['suppliers'] = $this->contacts->getBothPO();
-			//debug($data, 1);
+
+
+			
 			$this->_render_page('receivingwh/index', $data);
 		}
 
@@ -35,21 +38,30 @@
 			$poid = $result->id;
 			$items = $this->purchaseorder->getItemsBySOID($poid);
 
-			$tr = '';
-			foreach($items as $item){
+			
 
-				$tr .= '
-					<tr>
-						<td>'.$item->qty.'</td>
-						<td>'.$item->unit.'</td>
-						<td></td>
-						<td>'.$item->product_code.'</td>
-						<td>'.$po.'</td>
-						<td><input type="text" class="form-control" id="'.$item->id.'" /></td>
-					</tr>
-
-				';
+			if(empty($result)){
+				$tr = '';
 			}
+			else{
+				foreach($items as $item){
+
+					$tr .= '
+						<tr>
+							<td>'.$item->qty.'</td>
+							<td>'.$item->unit.'</td>
+							<td>N/A</td>
+							<td>'.$item->product_code.'</td>
+							<td>'.$po.'</td>
+							<td><input type="text" class="form-control" name="loaded[]" />
+								<input type="hidden" name="itemid[]" value="'.$item->id.'" />
+							</td>
+						</tr>
+
+					';
+				}	
+			}
+			
 			echo $tr;
 
 		}
@@ -99,6 +111,64 @@
 
 				echo json_encode($data);
 			}	
+		}
+
+		public function process(){
+			$post = $this->input->post();
+			$user_id = $this->session->userdata('user_id');
+
+			$savewr['comp_code'] = $post['supplier'];
+			$savewr['refno'] = $post['refno'];
+			$savewr['type'] = $post['type'];
+			$savewr['date'] = $post['date'];
+			$savewr['remarks'] = $post['remarks'];
+			$savewr['received_by'] = $user_id;
+			$savewr['updated_by'] = $user_id;
+			$savewr['prepared_by'] = $user_id;
+
+			$this->receivingwr->newRecord($savewr);
+			$items = $post['itemid'];
+			$loaded = $post['loaded'];
+
+				
+			foreach($items as $key => $value){
+				$saveitem['refno'] = $post['refno'];
+				$saveitem['item_id'] = $value;
+				$saveitem['loaded'] = $loaded[$key];
+
+				$this->receivingwr->newItem($saveitem);
+			}
+
+			redirect('receivingwh/list');
+
+		}
+
+		public function list(){
+			$data['title'] = 'Receiving (Warehouse)';
+			$data['bcrumbs'] = 'Receiving (Warehouse)';
+			$data['records'] = $this->receivingwr->getAll();
+
+			$this->_render_page('receivingwh/list', $data);
+		}
+
+		public function getitemloaded(){
+			$refno = $this->input->post('refno');
+
+			$items = $this->receivingwr->getItems($refno);
+			$tr = '';
+
+			foreach($items as $item){
+				$pitem  = $this->purchaseorder->getPOItemByID($item->item_id);
+				$tr .= '
+					<tr>
+						<td>'.$pitem->product_code.'</td>
+						<td>'.$pitem->qty.'</td>
+						<td>'.$item->loaded.'</td>
+					</tr>
+				';
+			}
+
+			echo $tr;
 		}
 
 		public function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense

@@ -14,14 +14,8 @@
 		<div class="col-md-12">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="">Customer PO:</label>
+					<label for="">Supplier PO:</label>
 					<input type="text" class="form-control" id="so" name="cpoNum" readonly value="<?= $purchaseorder['cpoNum'] ?>">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<label for="">PO Number:</label>
-					<input type="text" class="form-control" name="poNum" readonly  value="<?= $purchaseorder['poNum'] ?>">
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -32,23 +26,29 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
+					<label for="">Date Deliver:</label>
+					<input type="text" class="form-control datepicker" name="date_deliver" readonly  value="<?= $purchaseorder['date_deliver'] ?>">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
 					<label for="">Remarks:</label>
 					<textarea class="form-control" name="remarks" readonly ><?= $purchaseorder['remarks'] ?></textarea>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 
-			<h5>Products</h5>
+			<h5>Items</h5>
 			<a href="#" class="btn btn-default btn-xs" style="float: right;" data-toggle="modal" data-target="#pricelist">View Price List</a> 
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<td>Quantity</td>
 						<td>Unit</td>
-						<td>Products</td>
+						<td>Item</td>
 						<td>Unit Price</td>
 						<td>Amount</td>
 						<td colspan="3">Discount</td>
@@ -77,12 +77,11 @@
 						<td>
 						<?php
 							$dateordered = date('Y-m-d', strtotime($purchaseorder['date_ordered']));
-							$price = getProductSupplierPrice($item['product'], $contact->contact_id, $dateordered);	
+							$price = getProductSupplierPrice($item['product'], $contact->contact_id, $dateordered, $item['qty']);	
 							$priceDetails = getProductSupplierPriceDetails($item['product'], $contact->contact_id, $dateordered);	
 							
 							$unitprice =  peso_format($price);
 							echo $unitprice;
-							//echo $this->db->last_query();
 						?>
 							<input type="hidden" name="price[]" value="<?= $price ?>">		
 						</td>
@@ -147,11 +146,11 @@
 					</tr>
 					<tr>
 						<td colspan="4" style="text-align: right;">Less: VAT 12%</td>
-						<td><input type="text" class="form-control" style="width:100px; float: left;" id="lessVAT" value="<?= $lessVAT12 ?>" readonly name="lessVAT12" /> <a onClick="changeVAT(this)" class="btn btn-default">Edit</a></td>
+						<td><input type="text" class="form-control" style="width:100px; float: left;" id="lessVAT" value="<?= $lessVAT12 ?>" readonly name="lessVAT12" /> <a onClick="changeVAT(this)" class="btn btn-default">Edit</a><a onClick="clearVAT(this)" class="btn btn-default">Clear</a></td>
 					</tr>
 					<tr>
 						<td colspan="4" style="text-align: right;">Amount Net of VAT</td>
-						<td><input type="text" class="form-control" style="width:100px;" id="amountNet" name="amountNetVAT" value="<?= $amountNetVAT ?>" readonly /></td>
+						<td><input type="text" class="form-control" style="width:100px; float: left;" id="amountNet" name="amountNetVAT" value="<?= $amountNetVAT ?>" readonly />  </td>
 					</tr>
 					<tr>
 						<td colspan="4" style="text-align: right;">Less: SC/PWD-Discount</td>
@@ -245,6 +244,18 @@
 			$('#amountNet').val(amountNet);
 			$('#lessVAT').attr('readonly', 'readonly');
 			$(elem).html('Edit');
+		}
+	}
+
+	function clearVAT(elem){
+		if(confirm('Are you sure to clear VAT?')){
+			var lessVAT = 0;
+			var netSale = $('#netSale').val();
+			var amountNet = 0;
+			amountNet = netSale - lessVAT;
+			$('#amountNet').val(amountNet);
+			$('#lessVAT').val(0);
+			$('#lessVAT').attr('readonly', 'readonly');
 		}
 	}
 

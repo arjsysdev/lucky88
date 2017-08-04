@@ -283,7 +283,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="">End Date:</label>
-							<input type="text" class="form-control datepicker" id="end_date" name="end_date">
+							<input type="text" class="form-control datepicker" id="end_date" name="end_date" value="12/31/2050">
 						</div>
 					</div>
 				</div>
@@ -314,7 +314,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="">Unit Price:</label>
-							<input type="number" class="form-control" id="" name="price">
+							<input type="text" class="form-control" id="" name="price">
 						</div>	
 					</div>
 				</div>
@@ -322,19 +322,19 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 1 (%):</label>
-							<input type="number" class="form-control" id="" name="less1">
+							<input type="text" class="form-control" id="" name="less1">
 						</div>	
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 2 (%):</label>
-							<input type="number" class="form-control" id="" name="less2">
+							<input type="text" class="form-control" id="" name="less2">
 						</div>	
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="">Less 3 (%):</label>
-							<input type="number" class="form-control" id="" name="less3">
+							<input type="text" class="form-control" id="" name="less3">
 						</div>	
 					</div>
 				</div>
@@ -381,7 +381,7 @@
 	       		<div class="col-md-6">
 					<div class="form-group">
 						<label for="">End Date:</label>
-						<input type="text" class="form-control datepicker" id="end_dateFreight" name="end_date" >
+						<input type="text" class="form-control datepicker" id="end_dateFreight" name="end_date" value="12/31/2050" >
 					</div>
 	       		</div>
 	       	</div>

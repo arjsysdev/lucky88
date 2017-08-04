@@ -24,22 +24,32 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label for="">Supplier PO:</label>
 					<input type="text" class="form-control" id="so" name="cpoNum" readonly>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
-					<label for="">PO Number:</label>
-					<input type="text" class="form-control" name="poNum">
+					<label for="">Date Order: </label>
+					<input type="text" class="form-control datepicker" name="date_ordered">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="">Date Deliver: </label>
+					<input type="text" class="form-control datepicker" name="date_deliver">
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="">Date Order:</label>
-					<input type="text" class="form-control datepicker" name="date_ordered">
+					<label for="">Delivery At:</label>
+					<select class="form-control" name="delivery_at">
+						<option value="48 B Tandang Sora St. Bagong Barrio Caloocan">48 B Tandang Sora St. Bagong Barrio Caloocan</option>
+						<option value="126 D. Aquino St. between 6th &amp; 7th Avenue Grace Park Caloocan City">126 D. Aquino St. between 6th &amp; 7th Avenue Grace Park Caloocan City</option>
+						<option value="29 D. Aquino St. between 3rd &amp; 4th Ave Grace Park Caloocan City">29 D. Aquino St. between 3rd &amp; 4th Ave Grace Park Caloocan City</option>
+					</select>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -48,25 +58,19 @@
 					<textarea class="form-control" name="remarks"></textarea>
 				</div>
 			</div>
-		</div>	
+		</div>
+		
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 
-			<h5>Products</h5> 
+			<h5>Raw Materials</h5> 
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label">Select Products</label>
+					<label class="control-label">Select Item</label>
 						<div class="input-group">
 							<select class="form-control" id="products">
 								<option value="">-Select-</option>
-								<?php
-									foreach($products as $product){
-								?>
-									<option value="<?= $product->prod_code ?>"><?= $product->prod_code ?></option>
-								<?php
-									}
-								?>
 							</select>
 							<span class="input-group-btn">
 							  <button class="btn btn-default" type="button" id="btnProduct">Select</button>
@@ -115,9 +119,16 @@
 		$('#contacts').change(function(){
 			var code = this.value;
 			$.ajax({
-				url: '<?= base_url("ajax/getnumber") ?>/'+code,
+				url: '<?= base_url("ajax/getnumberPO") ?>/'+code,
 				success: function(data){
 					$('#so').val(data);
+					console.log(data);
+				}
+			});
+			$.ajax({
+				url: '<?= base_url("purchaseorder/getitems") ?>/'+code,
+				success: function(data){
+					$('#products').html(data);
 					console.log(data);
 				}
 			});

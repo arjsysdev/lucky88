@@ -6,7 +6,6 @@
 				<table class="table" id="sales">
 					<thead>
 						<tr>
-							<td>SO Number</td>
 							<td>PO Number</td>
 							<td>Customer ID</td>
 							<td>Date Order</td>
@@ -19,7 +18,6 @@
 						?>
 							<tr>
 								<td><?= $order->cpoNum ?></td>
-								<td><?= $order->poNum ?></td>
 								<td><?= $order->comp_code ?></td>
 								<td><?= date('F d,Y', strtotime($order->date_ordered)) ?></td>
 								<td><a href="<?= base_url('purchaseorder/view/'.$order->id) ?>" class="btn btn-primary">View</a></td>

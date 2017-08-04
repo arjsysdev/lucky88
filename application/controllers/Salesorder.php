@@ -73,6 +73,18 @@
 			$this->_render_page('sales/formprice', $data);
 		}
 
+		public function getitems($code){
+			if($code){
+				$contact = $this->contacts->getByCodeRow($code);
+				$itempl = $this->pricelist->getPriceListByID($contact->contact_id);
+				$str = '';
+				foreach($itempl as $item){
+					$str .= '<option value="'.$item->product_id.'">'.$item->product_id.'</option>';
+				}
+				echo $str;
+			}
+		}
+
 		public function step1so(){
 			//debug($this->input->post(), 1);
 			$save['cpoNum'] = $this->input->post('cpoNum');

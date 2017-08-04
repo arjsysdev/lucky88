@@ -251,6 +251,14 @@ class Products extends CI_Controller {
         redirect('Products');
 
     }
+
+    function viewing($id){
+        if($id){
+            $data['ings'] = $this->Products_model->getRawMatByProd($id);
+            //debug($data,  1);
+            $this->load->view('products/viewing', $data);
+        }
+    }
 	
 	function delete_each($p){
 		$ing_id = $this->input->post("delete");

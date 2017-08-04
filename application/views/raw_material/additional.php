@@ -14,7 +14,7 @@
         <div class="form-group">
           <label for="email" class="control-label col-sm-2">Image:</label>
           <div class="col-sm-10">
-            <input type="file" class="btn-default l-attach-input" name="userfile">
+            <input type="file" class="btn-default l-attach-input" name="userfile" required>
           </div>
         </div>
 

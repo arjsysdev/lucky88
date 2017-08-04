@@ -49,6 +49,21 @@ class Products_model extends CI_Model {
 		}
 	}
 
+	public function getRawMatByProd($id){
+		if($id){
+			$this->db->where('prod_id', $id);
+			return $this->db->get('product_ingredients')->result();
+		}
+	}
+
+	public function getRawInfo($id){
+		if($id){
+			$this->db->join('raw_materials_type', 'raw_materials_type.rmt_id = raw_materials.rm_type');
+			$this->db->where('material_id', $id);
+			return $this->db->get('raw_materials')->row();
+		}
+	}
+
 }
 
 
