@@ -1,29 +1,13 @@
 <form class="form-horizontal" action="<?= base_url('receivingwh/process') ?>" method="POST">
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Load Purchase Order</label>
+    <label class="control-label col-sm-2" for="email">Load TR Number</label>
     <div class="col-sm-5">
-
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for..." id="po" name="po">
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="button" id="addpo">Add</button>
         </span>
-      </div>
-
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="email">DR/SI:</label>
-    <div class="col-sm-5">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">
-          <select id="type" name="type">
-            <option>DR</option>
-            <option>SI</option>
-          </select>
-        </span>
-        <input type="text" class="form-control" id="code" name="code" onKeyup="calibrate()" />
       </div>
     </div>
   </div>

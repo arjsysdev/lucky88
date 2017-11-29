@@ -35,6 +35,12 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
+					<label for="">Delivery At:</label>
+					<input type="text" class="form-control datepicker" name="delivery_at" readonly value="<?= $order->delivery_at ?>">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
 					<label for="">Remarks:</label>
 					<textarea class="form-control" name="remarks" readonly><?= $order->remarks ?></textarea>
 				</div>

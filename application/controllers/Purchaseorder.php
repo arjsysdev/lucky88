@@ -44,6 +44,38 @@
 			
 		}
 
+		public function edit($id){
+			$data['title'] = 'Edit Purchase Order';
+			$data['bcrumbs'] = 'Edit Purchase Order';
+			if($id){
+				$data['id'] = $id;
+				$data['order'] = $this->purchaseorder->getByID($id);
+				$data['items'] = $this->purchaseorder->getItemsBySOID($id);
+			
+				$this->_render_page('purchase/edit', $data);
+			}
+			else{
+				show_404();
+			}
+			
+		}
+
+		public function editsave($id){
+
+			$save['date_ordered'] = $this->input->post('date_ordered');
+			$save['date_deliver'] = $this->input->post('date_deliver');
+			$save['delivery_at'] = $this->input->post('delivery_at');
+			$save['remarks'] = $this->input->post('remarks');
+
+			$this->session->set_flashdata('message', 'Purchase Order Successfully Updated!');
+			$this->purchaseorder->update($save, $id);
+
+			redirect('purchaseorder/view/'.$id);
+
+
+
+		}
+
 		public function printReceipt($id){
 			$data['title'] = 'Sales Orders';
 			$data['bcrumbs'] = 'Sales Orders';
@@ -149,6 +181,7 @@
 			$saveSO['date_ordered'] = date('Y-m-d', strtotime($post['date_ordered']));
 			$saveSO['date_deliver'] = date('Y-m-d', strtotime($post['date_deliver']));
 			$saveSO['remarks'] = $post['remarks'];
+			$saveSO['delivery_at'] = $post['delivery_at'];
 			$saveSO['grosstotal'] = round($post['grosstotal'], 2);
 			$saveSO['dis1less'] = round($post['dis1less'], 2);
 			$saveSO['dis2less'] = round($post['dis2less'], 2);

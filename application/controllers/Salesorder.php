@@ -40,6 +40,7 @@
 			$data['title'] = 'Sales Orders';
 			$data['bcrumbs'] = 'Sales Orders';
 			if($id){
+				$data['id'] = $id;
 				$data['order'] = $this->salesorder->getByID($id);
 				$data['items'] = $this->salesorder->getItemsBySOID($id);
 			
@@ -49,6 +50,25 @@
 				show_404();
 			}
 			
+		}
+
+		public function printReceipt($id){
+			$data['title'] = 'Sales Orders';
+			$data['bcrumbs'] = 'Sales Orders';
+			if($id){
+				$data['id'] = $id;
+				$data['order'] = $this->salesorder->getByID($id);
+				$data['customer'] = $this->salesorder->getCustomerByCC($data['order']->comp_code);
+				
+				$data['items'] = $this->salesorder->getItemsBySOID($id);
+				///debug($data, 1);
+				$this->viewdata = (empty($data)) ? $this->data: $data;
+				$this->load->view('sales/printReceipt', $this->viewdata);		
+			}
+			else{
+				show_404();
+			}
+
 		}
 
 		public function formadd(){

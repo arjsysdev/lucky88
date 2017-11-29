@@ -31,6 +31,8 @@ class Products_model extends CI_Model {
 
 
 
+
+
 	public function getAll(){
 		return $this->db->get($this->_table)->result();
 	}
@@ -61,6 +63,20 @@ class Products_model extends CI_Model {
 			$this->db->join('raw_materials_type', 'raw_materials_type.rmt_id = raw_materials.rm_type');
 			$this->db->where('material_id', $id);
 			return $this->db->get('raw_materials')->row();
+		}
+	}
+
+	public function getRMByCodeRow($code=null){
+		if($code != null){
+			$this->db->where('rm_code', $code);
+			return $this->db->get('raw_materials')->row();
+		}
+	}
+
+	public function getProductByCodeRow($code=null){
+		if($code != null){
+			$this->db->where('prod_code', $code);
+			return $this->db->get('products')->row();
 		}
 	}
 

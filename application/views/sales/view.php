@@ -3,7 +3,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<a href="<?= base_url('salesorder') ?>" class="btn btn-lg btn-success">Back</a>
+				<a href="javascript:popItUp('<?= base_url('salesorder/printReceipt/'.$id); ?>', 800, 1000)" class="btn btn-success">Print <i class="fa fa-print"></i></a>
+				<a href="<?= base_url('salesorder') ?>" class="btn btn-success">Back</a>
 			</div>
 		</div>
 	</div>
@@ -160,4 +161,9 @@
 	</div>
 </section>
 <script type="text/javascript">
+function popItUp(url, height, width) {
+	newwindow=window.open(url, 'name=Print Preview' ,'height= ' + height + ',width=' + width);
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
 </script>

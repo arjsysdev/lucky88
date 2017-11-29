@@ -30,6 +30,12 @@
 					<input type="text" class="form-control datepicker" name="date_deliver" readonly  value="<?= $purchaseorder['date_deliver'] ?>">
 				</div>
 			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="">Delivery At:</label>
+					<input type="text" class="form-control datepicker" name="delivery_at" readonly  value="<?= $purchaseorder['delivery_at'] ?>">
+				</div>
+			</div>
 			<div class="col-md-12">
 				<div class="form-group">
 					<label for="">Remarks:</label>

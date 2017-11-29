@@ -22,4 +22,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+	function testmail()
+	{
+		echo send_mail('arjohn.official@gmail.com','test ni arjohn','Simple content email.');
+	}
 }

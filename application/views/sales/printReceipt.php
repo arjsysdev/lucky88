@@ -20,44 +20,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 	<style type="text/css">
 		p.desc{
-			font-size: 10px;
+			font-size: 14px;
 		}
 		table{
-			font-size: 10px;
+			font-size: 14px;
 		}
 	</style>
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-10 text-center" style="margin-left: 100px;">
-				<p style="font-size: 24px; font-weight: 700;">Lucky 888 Food International, Inc.</p>
-				<p style="font-size: 12px;">126 D. Aquino St. Between 6th &amp; 7th Avenue Grace Park Caloocan City<br>
-				Tel: (632) 3617773 Fax: (632) 3621023</p>
-			</div>
-		</div>
-	</div>
 	<div class="col-md-12">
 		<div class="row">
 			<div class="panel-box">
-				<h4 class="tmargin15"><strong>Purchase Order</strong></h4>			
+				<h4 class="tmargin15"><strong>Sales Order</strong></h4>			
 				<section id="addsales">
 				
 					<div class="row">
 						<table class="table">
 							<tr>
 								<td width="60%">
-									<p class="desc">Supplier: <?= $customer->comp_name ?><br>
+									<p class="desc">Customer: <?= $customer->comp_name ?><br>
 									Contact No: <?= $customer->mob_no ?><br>
 									Contact Person: <?= $customer->cont_pers ?><br>
 									Fax Number: <?= $customer->fax_num ?></p>
 								</td>
 								<td>
 									<p class="desc">PO Number: <?= $order->cpoNum ?><br>
-									Date Order: <?= date("d-M-y", strtotime($order->date_ordered)) ?><br>
-									Delivery Date: <?= date("d-M-y", strtotime($order->date_deliver)) ?><br>
-									Delivery At: <?= $order->delivery_at ?></p>
+									Date Order: <?= date("d-M-y", strtotime($order->date_ordered)) ?></p>
 								</td>
 								
 							</tr>
@@ -85,14 +74,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										$less1 = 0;
 										$less2 = 0;
 										$less3 = 0;
+										//debug($items, 1);
 										foreach($items as $item){
 
-											$productInfo = $this->products->getRMByCodeRow($item->product_code);
+											$productInfo = $this->products->getProductByCodeRow($item->product_code);
 									?>
 									<tr>
 										<td><?= $item->qty ?></td>
 										<td><?= $item->unit ?></td>
-										<td><?= $productInfo->rm_name?></td>
+										<td><?= $productInfo->prod_name?></td>
 										<td><?= peso_format($item->price) ?>
 										</td>
 										<td>
@@ -157,21 +147,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</tr>
 								</tbody>
 							</table>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<b>Remarks: </b>
-						</div>
-						<div class="col-md-6">
-							<b>**Notes:</b> 
-							<p class="desc">
-							1. Kindly indicate our PO# in your receipt upon delivery. <br>
-							2. Counter receipts are only accepted once the order in this PO is complete. <br>
-							3. Delivery at <?php echo $order->delivery_at ?> <br>
-							4. Collection is at the same location. <br>
-							5. Collection is every Saturday only. <br>
-							6. Check availabilty may be viewed at www.lucky888food.com</p>
 						</div>
 					</div>
 				</section>

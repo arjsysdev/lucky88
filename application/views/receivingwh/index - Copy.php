@@ -1,24 +1,26 @@
 <form class="form-horizontal" action="<?= base_url('receivingwh/process') ?>" method="POST">
-
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Load Purchase Order</label>
-    <div class="col-sm-5">
-
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." id="po" name="po">
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button" id="addpo">Add</button>
-        </span>
-      </div>
-
+    <label class="control-label col-sm-2" for="pwd">Supplier:</label>
+    <div class="col-sm-5"> 
+      <select class="form-control" id="supplier" name="supplier" onChange="calibrate()">
+        <?php
+          foreach($suppliers as $supplier){
+        ?>
+          <option value="<?= $supplier->comp_code ?>"><?= $supplier->comp_code ?></option>
+        <?php
+          }
+        ?>
+      </select>
     </div>
   </div>
+  
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">DR/SI:</label>
+    <label class="control-label col-sm-2" for="email">TR/DR/SI:</label>
     <div class="col-sm-5">
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">
           <select id="type" name="type">
+            <option>TR</option>
             <option>DR</option>
             <option>SI</option>
           </select>
@@ -43,6 +45,28 @@
     <label class="control-label col-sm-2" for="email">Remarks:</label>
     <div class="col-sm-5">
       <textarea class="form-control" name="remarks" placeholder="Remarks or Notes"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="">Fetch From:</label>
+    <div class="col-sm-5">
+      <select class="form-control" name="fetch_from">
+        <option value="126 D. Aquino St. between 6th &amp; 7th Avenue Grace Park Caloocan City">126 D. Aquino St. between 6th &amp; 7th Avenue Grace Park Caloocan City</option>
+        <option value="29 D. Aquino St. between 3rd &amp; 4th Ave Grace Park Caloocan City">29 D. Aquino St. between 3rd &amp; 4th Ave Grace Park Caloocan City</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Load Purchase Order</label>
+    <div class="col-sm-5">
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." id="po" name="po">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" id="addpo">Add</button>
+        </span>
+      </div>
+
     </div>
   </div>
 
@@ -102,8 +126,7 @@
           }
       })
 
-      function calibrate()
-      {
+      function calibrate(){
           var code = $('#code').val();
           var supplier = $('#supplier').val();
 

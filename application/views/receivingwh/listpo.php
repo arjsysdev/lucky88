@@ -1,8 +1,19 @@
 <section id="receivingwh">
 	<div class="row">
 		<div class="col-md-12">	
-			<a href="<?= base_url('receivingwh') ?>" class="btn btn-default" style="margin-bottom: 20px;">Add</a><br />
+			<a href="<?= base_url('receivingwh/option') ?>" class="btn btn-default" style="margin-bottom: 20px;">Add</a><br />
 			<div class="table-responsive">
+				<?php
+					if($this->session->flashdata('message') != '')
+					{
+				?>
+					<div class="alert alert-dismissible alert-<?php echo $this->session->flashdata('msgType') ?>">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <?php echo $this->session->flashdata('message') ?>
+					</div>
+				<?php
+					}
+				?>
 				<table class="table" id="sales">
 					<thead>
 						<tr>

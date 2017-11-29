@@ -58,6 +58,13 @@ class Salesorder_model extends CI_Model {
 		}
 	}
 
+	public function getCustomerByCC($cc){
+		if($cc){
+			$this->db->where('comp_code', $cc);
+			return $this->db->get('contact')->row();
+		}
+	}
+
 }
 
 ?>

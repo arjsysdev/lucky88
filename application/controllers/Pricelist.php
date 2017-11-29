@@ -59,6 +59,7 @@
 				$old = array();
 			}
 			array_push($old, $raw);
+			//debug($this->input->post('end_date'), 1);
 			$this->session->set_userdata('plist', $old);
 			$new = $this->session->userdata('plist');
 			redirect('pricelist/cplist?customer='.$this->input->post('contact_id'));

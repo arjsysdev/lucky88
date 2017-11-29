@@ -224,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo base_url('receivingwh/list'); ?>"><i class="fa fa-file-archive-o"></i> Warehouse</a></li>
+            <li class="active"><a href="<?php echo base_url('receivingwh/option'); ?>"><i class="fa fa-file-archive-o"></i> Warehouse</a></li>
           </ul>
         </li>
       </ul>

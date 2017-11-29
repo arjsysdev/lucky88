@@ -18,33 +18,36 @@
         return $object;
     }
 	
-	function send_mail($to, $cc = '', $bcc = '', $subject,$msg) {
-	
-		 
-		$data = array();
+	function send_mail($send_to, $subject, $content) {
 
-		$data['from'] = 'AML System Mail Engine <do-not-reply@agribank.com.ph>';
-		$data['to'] = $to;
-		$data['subject'] = $subject;
-		$data['html'] = $msg;
-		if($cc != ''){
-			$data['cc'] = $cc;
-		}
-		if($bcc != ''){
-			$data['bcc'] = $bcc;
-		}
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-		curl_setopt($ch, CURLOPT_USERPWD, 'api:'.MAILGUN_API);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-		curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v2/'.MAILGUN_DOMAIN.'/messages');
-		//curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/sandbox90489ea6478b40cb91caac890740c8e3.mailgun.org');
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		$result = curl_exec($ch);
-		curl_close($ch);
-
+		$api_key = 'key-f45a96d5340b0eda32ceaab7c138e40a';
+		$api_domain = 'mg.lucky888food.com';
+		// $send_to = 'hmadriano@agribank.com.ph';
+		$name = "Lucky 888 Food International";
+		$email = "do-not-reply@lucky888food.com";
+		// $content = "Sample Mail Gun";
+		$messageBody = "Contact: $name ($email) <br/> $content";
+		$config = array();
+		$config['api_key'] = $api_key;
+		$config['api_url'] = 'https://api.mailgun.net/v2/'.$api_domain.'/messages';
+		$message = array();
+		$message['from'] = $email;
+		$message['to'] = $send_to;
+		$message['h:Reply-To'] = $email;
+		$message['subject'] = $subject;
+		$message['html'] = $messageBody;
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $config['api_url']);
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		curl_setopt($curl, CURLOPT_USERPWD, "api:{$config['api_key']}");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curl, CURLOPT_POST, true); 
+		curl_setopt($curl, CURLOPT_POSTFIELDS,$message);
+		$result = curl_exec($curl);
+		curl_close($curl);
 		return $result;
 	}
 

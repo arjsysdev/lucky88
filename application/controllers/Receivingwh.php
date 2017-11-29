@@ -39,7 +39,7 @@
 			$items = $this->purchaseorder->getItemsBySOID($poid);
 
 			
-
+			$tr = '';
 			if(empty($result)){
 				$tr = '';
 			}
@@ -91,6 +91,7 @@
 		}
 
 
+
 		public function getitems($id){
 			if($id){
 				$data['info'] = $this->receipts->getReceiptByID($id);
@@ -122,10 +123,11 @@
 			$savewr['type'] = $post['type'];
 			$savewr['date'] = $post['date'];
 			$savewr['remarks'] = $post['remarks'];
+			$savewr['fetch_from'] = $post['fetch_from'];
 			$savewr['received_by'] = $user_id;
 			$savewr['updated_by'] = $user_id;
 			$savewr['prepared_by'] = $user_id;
-
+			//debug($savewr, 1);
 			$this->receivingwr->newRecord($savewr);
 			$items = $post['itemid'];
 			$loaded = $post['loaded'];
@@ -138,17 +140,28 @@
 
 				$this->receivingwr->newItem($saveitem);
 			}
+			$this->session->set_flashdata('msgType','success');
+			$this->session->set_flashdata('message','Transfer Record successfully saved!');
 
 			redirect('receivingwh/list');
 
 		}
 
-		public function list(){
-			$data['title'] = 'Receiving (Warehouse)';
-			$data['bcrumbs'] = 'Receiving (Warehouse)';
+		public function listpo(){
+			$data['title'] = 'Receiving (PO)';
+			$data['bcrumbs'] = 'Receiving (PO)';
 			$data['records'] = $this->receivingwr->getAll();
 
-			$this->_render_page('receivingwh/list', $data);
+			$this->_render_page('receivingwh/listpo', $data);
+		}
+
+
+		public function listtr(){
+			$data['title'] = 'Receiving (TR)';
+			$data['bcrumbs'] = 'Receiving (TR)';
+			$data['records'] = $this->receivingwr->getAll();
+
+			$this->_render_page('receivingwh/listtr', $data);
 		}
 
 		public function getitemloaded(){
@@ -169,6 +182,14 @@
 			}
 
 			echo $tr;
+		}
+
+		public function option()
+		{
+			$data['title'] = 'Receiving Option (Warehouse)';
+			$data['bcrumbs'] = 'Receiving Option(Warehouse)';
+
+			$this->_render_page('receivingwh/option', $data);
 		}
 
 		public function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
